@@ -3,9 +3,11 @@ game.module(
 )
 .body(function() {
   game.addAsset('images/player.png');
-  game.addAsset('images/BG_Layer1.png');
-  game.addAsset('images/BG_Layer2.png');
-  game.addAsset('images/BG_Layer3.png');
+  game.addAsset('images/sterne512.png');
+  game.addAsset('images/sterne256.png');
+  game.addAsset('images/hintergrund.jpg');
+  game.addAsset('images/hintergrund_saturn.png');
+
   game.addAsset('images/bubble_test_animsheet.png');
   game.addAsset('images/bubble_toast_animsheet.png');
   game.addAsset('images/naut_sadtest.png');
