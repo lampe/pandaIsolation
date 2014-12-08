@@ -1,5 +1,6 @@
 game.module(
-  'game.main'
+  'game.main',
+  'game.pixi'
 )
 .require(
   'game.assets',
