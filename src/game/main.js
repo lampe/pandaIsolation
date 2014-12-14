@@ -10,6 +10,7 @@ game.module(
   game.createScene('Main', {
       init: function() {
         var bg = new game.ParallaxBackground();
+
         game.player = new game.Player('images/naut_test.png',game.system.width / 4, game.system.height / 2);
         var bubble = new game.Bubble({"asset": "images/bubble_test_animsheet.png", "clickedAnimation": "images/thought_test.png", "x": 100, "y":game.system.height -200});
         setTimeout(function(){
@@ -21,8 +22,8 @@ game.module(
         setTimeout(function(){
           var bubble3 = new game.Bubble({"asset": "images/bubble_test_animsheet.png", "clickedAnimation": "images/thought_test.png", "x":-220, "y":game.system.height / 2});
         }, 1000);
-        game.audio.playMusic('music');
-        game.audio.setMusicVolume(0.4);
+        // game.audio.playMusic('music');
+        // game.audio.setMusicVolume(0.4);
         // game.shakeitbaby(10);
         // game.shakeitbaby(10,10,10);
       }

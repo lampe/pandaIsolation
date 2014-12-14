@@ -6,4 +6,4 @@ game.module(
   'game.objects.ParallaxBackground',
   'game.objects.Bubble',
   'game.objects.AnimationBubble'
-);
+).body(function() {});
