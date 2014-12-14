@@ -46,7 +46,9 @@ game.Debug = game.Class.extend({
 
         if (game.Timer.last >= this.last + game.Debug.frequency) {
             var fps = (Math.round((this.frames * 1000) / (game.Timer.last - this.last)));
-            this.debugDiv.innerHTML = 'FPS: ' + fps + ' OBJECTS: ' + this.objects;
+            var text = 'FPS: ' + fps + ' OBJECTS: ' + this.objects;
+            if (game.tweenEngine) text += ' TWEENS: ' + game.tweenEngine.tweens.length;
+            this.debugDiv.innerHTML = text;
             this.last = game.Timer.last;
             this.frames = 0;
         }
@@ -261,5 +263,16 @@ game.DebugDraw.bodyAlpha = 0.3;
     @attribute {Boolean} enabled
 **/
 game.DebugDraw.enabled = document.location.href.match(/\?debugdraw/) ? true : false;
+
+game.onStart = function() {
+    if (game.Debug && game.Debug.enabled) {
+        console.log('Panda.js ' + game.version);
+        console.log('Pixi.js ' + game.PIXI.VERSION.replace('v', ''));
+        console.log((this.system.renderer.gl ? 'WebGL' : 'Canvas') + ' renderer ' + this.system.width + 'x' + this.system.height);
+        if (this.Audio && this.Audio.enabled) console.log((this.audio.context ? 'Web Audio' : 'HTML5 Audio') + ' engine');
+        else console.log('Audio disabled');
+        if (this.config.version) console.log((this.config.name ? this.config.name : 'Game') + ' ' + this.config.version);
+    }
+};
 
 });

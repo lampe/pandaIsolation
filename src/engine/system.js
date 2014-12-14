@@ -131,21 +131,7 @@ game.System = game.Class.extend({
             document.body.appendChild(canvas);
         }
 
-        game.PIXI.scaleModes.DEFAULT = game.PIXI.scaleModes[game.System.scaleMode.toUpperCase()] || 0;
-
-        if (game.System.webGL) this.renderer = new game.autoDetectRenderer(width, height, {
-            view: document.getElementById(this.canvasId),
-            transparent: game.System.transparent,
-            antialias: game.System.antialias
-        });
-        else this.renderer = new game.CanvasRenderer(width, height, {
-            view: document.getElementById(this.canvasId),
-            transparent: game.System.transparent
-        });
-
-        this.webGL = !!this.renderer.gl;
-        this.canvas = this.renderer.view;
-        this.stage = new game.Stage();
+        this.initRenderer(width, height);
 
         game.normalizeVendorAttribute(this.canvas, 'requestFullscreen');
         game.normalizeVendorAttribute(this.canvas, 'requestFullScreen');
@@ -199,7 +185,7 @@ game.System = game.Class.extend({
 
             if (!game.device.mobile) {
                 if (game.System.bgColor) document.body.style.backgroundColor = game.System.bgColor;
-                if (game.System.bgImage) document.body.style.backgroundImage = 'url(' + game.config.mediaFolder + game.System.bgImage + ')';
+                if (game.System.bgImage) document.body.style.backgroundImage = 'url(' + game.getMediaPath(game.System.bgImage) + ')';
             }
             if (game.System.bgPosition) document.body.style.backgroundPosition = game.System.bgPosition;
 
@@ -209,6 +195,24 @@ game.System = game.Class.extend({
             this.resizeToFill();
             this.canvas.style.cssText = 'idtkscale:' + game.System.idtkScale + ';';
         }
+    },
+
+    initRenderer: function(width, height) {
+        game.PIXI.scaleModes.DEFAULT = game.PIXI.scaleModes[game.System.scaleMode.toUpperCase()] || 0;
+
+        if (game.System.webGL) this.renderer = new game.autoDetectRenderer(width, height, {
+            view: document.getElementById(this.canvasId),
+            transparent: game.System.transparent,
+            antialias: game.System.antialias
+        });
+        else this.renderer = new game.CanvasRenderer(width, height, {
+            view: document.getElementById(this.canvasId),
+            transparent: game.System.transparent
+        });
+
+        this.webGL = !!this.renderer.gl;
+        this.canvas = this.renderer.view;
+        this.stage = new game.Stage();
     },
 
     resizeToFill: function() {
@@ -291,6 +295,7 @@ game.System = game.Class.extend({
     },
 
     setSceneNow: function(sceneClass, removeAssets) {
+        if (game.scene) game.scene.exit();
         if (game.tweenEngine) game.tweenEngine.tweens.length = 0;
         if (removeAssets) game.removeAssets();
         game.scene = new (sceneClass)();
@@ -374,11 +379,11 @@ game.System = game.Class.extend({
                         div.appendChild(img);
                         me.resizeRotateImage();
                     };
-                    if (game.System.rotateImg.indexOf('data:') === 0) img.src = game.System.rotateImg;
+                    if (game.System.rotateImg.indexOf('data:') === 0) {
+                        img.src = game.System.rotateImg;
+                    }
                     else {
-                        var path = game.System.rotateImg;
-                        if (game.config.mediaFolder) path = game.config.mediaFolder + '/' + path;
-                        img.src = path;
+                        img.src = game.getMediaPath(game.System.rotateImg);
                     }
                     img.style.position = 'relative';
                     img.style.maxWidth = '100%';
@@ -441,8 +446,8 @@ game.System = game.Class.extend({
         if (this.rotateScreenVisible && game.System.bgColorRotate) document.body.style.backgroundColor = game.System.bgColorRotate;
         if (!this.rotateScreenVisible && game.System.bgColorMobile) document.body.style.backgroundColor = game.System.bgColorMobile;
 
-        if (this.rotateScreenVisible && game.System.bgImageRotate) document.body.style.backgroundImage = 'url(' + game.config.mediaFolder + game.System.bgImageRotate + ')';
-        if (!this.rotateScreenVisible && game.System.bgImageMobile) document.body.style.backgroundImage = 'url(' + game.config.mediaFolder + game.System.bgImageMobile + ')';
+        if (this.rotateScreenVisible && game.System.bgImageRotate) document.body.style.backgroundImage = 'url(' + game.getMediaPath(game.System.bgImageRotate) + ')';
+        if (!this.rotateScreenVisible && game.System.bgImageMobile) document.body.style.backgroundImage = 'url(' + game.getMediaPath(game.System.bgImageMobile) + ')';
 
         if (this.rotateScreenVisible && game.system && typeof game.system.pause === 'function') game.system.pause();
         if (!this.rotateScreenVisible && game.system && typeof game.system.resume === 'function') game.system.resume();

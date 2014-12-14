@@ -1,36 +1,22 @@
 // Panda.js HTML5 game engine
 
 // created by Eemeli Kelokorpi
-// inspired by Impact Game Engine
-// sponsored by Yle
 
 'use strict';
 
 /**
     @module game
     @namespace game
-    @requires loader
-    @requires timer
-    @requires system
-    @requires audio
-    @requires debug
-    @requires storage
-    @requires tween
-    @requires scene
-    @requires pool
-    @requires analytics
 **/
 /**
     @class Core
 **/
 var game = {
     /**
-        Current engine version.
         @property {String} version
     **/
-    version: '1.10.1',
+    version: '1.11.0',
     /**
-        Engine settings.
         @property {Object} config
     **/
     config: typeof pandaConfig !== 'undefined' ? pandaConfig : {},
@@ -73,10 +59,10 @@ var game = {
     **/
     system: null,
     /**
-        Instance of {{#crossLink "game.SoundManager"}}{{/crossLink}}.
-        @property {game.SoundManager} sound
+        Instance of {{#crossLink "game.Audio"}}{{/crossLink}}.
+        @property {game.Audio} sound
     **/
-    sound: null,
+    audio: null,
     /**
         Instance of {{#crossLink "game.Pool"}}{{/crossLink}}.
         @property {game.Pool} pool
@@ -173,7 +159,7 @@ var game = {
         return to;
     },
 
-    ksort: function(obj) {
+    ksort: function(obj, compare) {
         if (!obj || typeof obj !== 'object') return false;
 
         var keys = [], result = {}, i;
@@ -181,7 +167,7 @@ var game = {
             keys.push(i);
         }
         
-        keys.sort();
+        keys.sort(compare);
         for (i = 0; i < keys.length; i++) {
             result[keys[i]] = obj[keys[i]];
         }
@@ -258,12 +244,16 @@ var game = {
 
     addFileToQueue: function(path, id, queue) {
         id = id || path;
-        path = path + this.nocache;
-        if (this.config.mediaFolder) path = this.config.mediaFolder + '/' + path;
+        path = this.getMediaPath(path) + this.nocache;
         if (this.paths[id]) return id;
         this.paths[id] = path;
         if (this[queue].indexOf(path) === -1) this[queue].push(path);
         return id;
+    },
+
+    getMediaPath: function(file) {
+        if (this.config.mediaFolder) file = this.config.mediaFolder + '/' + file;
+        return file;
     },
 
     /**
@@ -306,8 +296,8 @@ var game = {
         @param {String} name
     **/
     module: function(name) {
-        if (this.current) throw('Module ' + this.current.name + ' has no body');
-        if (this.modules[name] && this.modules[name].body) throw('Module ' + name + ' is already defined');
+        if (this.current) throw 'module ' + this.current.name + ' has no body';
+        if (this.modules[name] && this.modules[name].body) throw 'module ' + name + ' is already defined';
 
         this.current = { name: name, requires: [], loaded: false, body: null };
         if (name === 'game.main') this.current.requires.push('engine.core');
@@ -360,16 +350,6 @@ var game = {
         this.system = new this.System(width, height);
 
         if (this.Audio) this.audio = new this.Audio();
-
-        if (game.Debug && game.Debug.enabled) {
-            console.log('Panda.js ' + game.version);
-            console.log('Pixi.js ' + game.PIXI.VERSION.replace('v', ''));
-            console.log((this.system.renderer.gl ? 'WebGL' : 'Canvas') + ' renderer ' + this.system.width + 'x' + this.system.height);
-            if (this.Audio && this.Audio.enabled) console.log((this.audio.context ? 'Web Audio' : 'HTML5 Audio') + ' engine');
-            else console.log('Audio disabled');
-            if (this.config.version) console.log((this.config.name ? this.config.name : 'Game') + ' ' + this.config.version);
-        }
-
         if (this.Pool) this.pool = new this.Pool();
         if (this.DebugDraw && this.DebugDraw.enabled) this.debugDraw = new this.DebugDraw();
         if (this.Storage && this.Storage.id) this.storage = new this.Storage(this.Storage.id);
@@ -383,6 +363,11 @@ var game = {
 
         this.loader = new (this.Loader)(scene);
         if (!this.system.rotateScreenVisible) this.loader.start();
+
+        this.onStart();
+    },
+
+    onStart: function() {
     },
 
     loadScript: function(name, requiredFrom) {
@@ -401,7 +386,7 @@ var game = {
             me.loadModules();
         };
         script.onerror = function() {
-            throw('Failed to load module ' + name + ' at ' + path + ' required from ' + requiredFrom);
+            throw 'to load module ' + name + ' at ' + path + ' required from ' + requiredFrom;
         };
         document.getElementsByTagName('head')[0].appendChild(script);
     },
@@ -460,7 +445,7 @@ var game = {
                 }
                 unresolved.push(this.moduleQueue[i].name + ' (requires: ' + unloaded.join(', ') + ')');
             }
-            throw('Unresolved modules:\n' + unresolved.join('\n'));
+            throw 'unresolved modules:\n' + unresolved.join('\n');
         }
         else {
             this.loadFinished = true;
@@ -604,7 +589,7 @@ var game = {
         this.device.android = /android/i.test(navigator.userAgent);
         this.device.android2 = /android 2/i.test(navigator.userAgent);
         var androidVer = navigator.userAgent.match(/Android.*AppleWebKit\/([\d.]+)/);
-        this.device.androidStock = (androidVer && androidVer[1] < 537);
+        this.device.androidStock = !!(androidVer && androidVer[1] < 537);
         
         // Internet Explorer
         this.device.ie9 = /MSIE 9/i.test(navigator.userAgent);
@@ -695,7 +680,7 @@ var game = {
     },
 
     createClass: function(name, extend, content) {
-        if (game[name]) throw 'Class ' + name + ' already exist';
+        if (game[name]) throw 'class ' + name + ' already created';
 
         if (typeof extend === 'object') {
             content = extend;
@@ -710,7 +695,7 @@ var game = {
     },
 
     addAttributes: function(className, attributes) {
-        if (!this[className]) throw 'Class ' + className + ' not found';
+        if (!this[className]) throw 'class ' + className + ' not found';
 
         for (var name in attributes) {
             this[className][name] = attributes[name];
