@@ -18,5 +18,6 @@ game.module(
   game.addAsset('images/thought_talk.png');
   game.addAudio('audio/bgmusic.ogg', 'music');
   game.addAudio('audio/clickbubble.wav');
+  game.addAsset('images/particle.png');
 
 });

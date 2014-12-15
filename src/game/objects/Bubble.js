@@ -13,6 +13,8 @@ game.module(
       this.sprite.alpha = 0.1;
       this.sprite.refToBubble = this;
       this.sprite.runUpdate = true;
+      this.sprite.clicked = false;
+      this.sprite.nextRound = p.nextRound;
       game.scene.addObject(this);
       this.sprite.animatonFrames = this.sprite.texture.width / this.sprite.width;
       this.sprite.animatonFrame = 1;
@@ -28,19 +30,10 @@ game.module(
         this.tweenAlpha.to({ "x": 4, "y": 4 }, 1000);
         this.tweenAlpha.easing('Quadratic.InOut');
         this.tweenAlpha.start();
-        function TO(object){
-          console.log(object)
-          new game.animationBubble({"asset":object.properties.clickedAnimation, "x":0, "y":game.system.height / 4});
-          // game.scene.removeObject(this.refToBubble);
-          // object.refToBubble._destroyCachedSprite();
-          object.position ={ x: -9999, y: -9999};
-          object.runUpdate = false;
-        }
-        setTimeout(TO, 1000, this);
+        this.animationeTimer = new game.Timer();
       };
       this.sprite.interactive = true;
       this.frameCounter = 0;
-      // console.log(this.sprite.position.x)
       var length = Math.floor(Math.random() * 12000) + 7000;
       this.sprite.tweenAlpha = new game.Tween(this.sprite);
       this.sprite.tweenAlpha.to({"alpha": 1}, length);
@@ -51,7 +44,6 @@ game.module(
       this.sprite.tweenAlpha.to({ "x": distance }, length);
       this.sprite.tweenAlpha.easing('Quadratic.InOut');
       this.sprite.tweenAlpha.start();
-
     },
     update: function(){
       if(this.sprite.runUpdate){
@@ -64,16 +56,21 @@ game.module(
           }
           this.sprite.tilePosition.x += 210;
         }
-        // if(this.sprite.position.x - game.player.sprite.position.x >= 500){
-        //   this.sprite.position.x -= 5;
-        // }
-        // if(this.sprite.clicked){
-        //   this.sprite.scale.x += 0.1;
-        //   this.sprite.scale.y += 0.1;
-        // }
-        // if(this.sprite.scale.x >= 4){
-        //   this.sprite.clicked = false;
-        // }
+        if(this.sprite.animationeTimer !== undefined){
+          if(this.sprite.animationeTimer.time() >= 1000){
+            new game.AnimationBubble({
+              "asset":this.sprite.properties.clickedAnimation,
+              "x":0,
+              "y":game.system.height / 4,
+              "nextRound": this.sprite.nextRound
+            });
+            // game.scene.removeObject(this.refToBubble);
+            // object.refToBubble._destroyCachedSprite();
+            this.sprite.position ={ x: -9999, y: -9999};
+            this.sprite.runUpdate = false;
+            // this.sprite.animationeTimer.pause();
+          }
+        }
       }
     }
   });

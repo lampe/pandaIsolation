@@ -9,6 +9,7 @@ game.module(
       this.sprite.anchor.set(0.5, 0.5);
       this.sprite.scale.x = 0.65;
       this.sprite.scale.y = 0.65;
+      this.sanity = 0;
       game.scene.addObject(this);
     },
     // update: function() {
