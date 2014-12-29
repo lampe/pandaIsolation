@@ -4,8 +4,8 @@ game.module(
 .body(function() {
   game.rounds = {
     "start": function(){
-      game.rounds.randomDep.start();
-      game.inRound = game.rounds.randomDep;
+      game.rounds.round1.start();
+      game.inRound = game.rounds.round1;
     },
     "nextRound": function(round){
       if(game.inRound.bubbles !== undefined){
