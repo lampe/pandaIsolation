@@ -10,7 +10,7 @@ game.module(
       this.staticBg2 = new game.Sprite('images/hintergrund_saturn.png',game.system.width/2,game.system.height/2);
       this.staticBg2.anchor.set(0.5, 0.5);
       this.bgContainer.addChild(this.staticBg2); // Add the background to the bg container
-
+      
       this.levelBg = new game.TilingSprite('images/sterne512.png',game.system.width,game.system.height);
       this.levelBg.position.set(game.system.width/2, game.system.height/2);
       this.levelBg.anchor.set(0.5, 0.5);

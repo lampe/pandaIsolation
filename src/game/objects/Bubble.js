@@ -22,8 +22,11 @@ game.module(
       game.scene.addObject(this);
     },
     update: function(){
+      if(this.anim.scale.x >game.inRound.maxBubbleScale){
+        game.rounds.nextRound("youlost");
+      }
       if(this.anim.properties.type === "growingBubble"){
-        if(this.anim.scale < 2){
+        if(this.anim.scale.x <= game.inRound.maxBubbleScale){
           this.anim.scale.x += 0.01;
           this.anim.scale.y += 0.01;
         }
@@ -34,6 +37,9 @@ game.module(
         if(this.properties.type === "correctBubble"){
           console.log("correct");
           game.inRound.gotAllCorrect(this.properties);
+        }else if(this.properties.type === "smallerMakingBubble"){
+          game.inRound.mainBubble.anim.scale.x -= 0.10;
+          game.inRound.mainBubble.anim.scale.y -= 0.10;
         }
         if(this.properties.outroAnimation === "plop"){
           this.tweenAlpha.stop();

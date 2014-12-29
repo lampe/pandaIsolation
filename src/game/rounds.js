@@ -160,12 +160,12 @@ game.module(
           this.won = true;
           console.log(this, this.falseBubbles)
           for (var i = 0; i < this.falseBubbles.length; i++) {
-              sprite = this.falseBubbles[i].anim;
-              sprite.tweenAlpha.stop();
-              sprite.tweenAlpha = new game.Tween(sprite.position);
-              sprite.tweenAlpha.to({ x: -500, y: sprite.position.y }, 1000);
-              sprite.tweenAlpha.easing('Quadratic.InOut');
-              sprite.tweenAlpha.start();
+            sprite = this.falseBubbles[i].anim;
+            sprite.tweenAlpha.stop();
+            sprite.tweenAlpha = new game.Tween(sprite.position);
+            sprite.tweenAlpha.to({ x: -500, y: sprite.position.y }, 1000);
+            sprite.tweenAlpha.easing('Quadratic.InOut');
+            sprite.tweenAlpha.start();
           }
           game.rounds.nextRound(properties.nextRound);
         }
@@ -187,8 +187,17 @@ game.module(
       }
     },
     "randomDep": {
+      "mainBubble": undefined,
+      "maxBubbleScale": 4,
+      "bubbles": [],
+      "won": false,
       "start": function(){
-        new game.Bubble({
+        var that = this;
+        var assets = [];
+        assets.push("images/bubble_toast_animsheet.png");
+        assets.push("images/bubble_test_animsheet.png");
+        assets.push("images/bubble_talk.png");
+        this.mainBubble = new game.Bubble({
           "type": "growingBubble",
           "asset": "images/bubble_toast_animsheet.png",
           "clickedAnimation": "images/thought_test.png",
@@ -197,6 +206,27 @@ game.module(
           "nextRound": "End",
           "introAnimation": "plop",
           "outroAnimation": "biggerPlop"
+        });
+        for (var i = 0; i < 40; i++) {
+          game.scene.addTimer(Math.floor(Math.random() * 12000) + 100, function() {
+            if(that.won === false){
+              that.bubbles.push(new game.Bubble({
+                "type": "smallerMakingBubble",
+                "asset": assets[Math.floor(Math.random() * assets.length) + 0],
+                "clickedAnimation": "images/thought_test.png",
+                "x": Math.floor(Math.random() * game.system.width) + (-210),
+                "y": Math.floor(Math.random() * game.system.height) + 0,
+                "nextRound": "End",
+                "introAnimation": "plop",
+                "outroAnimation": "plop"
+              }));
+            }
+          });
+        }
+        game.scene.addTimer(10000, function(){
+          that.won = true;
+          that.mainBubble.anim.remove();
+          game.rounds.nextRound("End");
         });
       }
     },
@@ -225,5 +255,4 @@ game.module(
       }
     }
   };
-
 });
