@@ -8,6 +8,13 @@ game.module(
       game.inRound = game.rounds.round1;
     },
     "nextRound": function(round){
+      if(game.inRound.onEnd() !== undefined){
+        game.inRound.onEnd()
+      }
+      game.rounds[round].start();
+      game.inRound = game.rounds[round];
+    },
+    "removeBubbles": function(){
       if(game.inRound.bubbles !== undefined){
         for (var i = 0; i < game.inRound.bubbles.length; i++) {
           if(game.inRound.bubbles[i].anim.clicked !== true){
@@ -20,8 +27,6 @@ game.module(
           }
         }
       }
-      game.rounds[round].start();
-      game.inRound = game.rounds[round];
     },
     "round1": {
       "bubbles": [],
@@ -54,6 +59,9 @@ game.module(
           "y":game.system.height / 2,
           "nextRound": "End"
         }));
+      },
+      "onEnd": function(){
+        game.rounds.removeBubbles();
       }
     },
     "roundD1": {
@@ -84,6 +92,9 @@ game.module(
             "y": 400
           }
         });
+      },
+      "onEnd": function(){
+        game.rounds.removeBubbles();
       }
     },
     "roundM1":{
@@ -104,6 +115,9 @@ game.module(
           "y":game.system.height / 2,
           "nextRound": "End"
         }));
+      },
+      "onEnd": function(){
+        game.rounds.removeBubbles();
       }
     },
     "randomManisch":{
@@ -184,6 +198,9 @@ game.module(
             }
           }
         }
+      },
+      "onEnd": function(){
+        // game.rounds.removeBubbles();
       }
     },
     "randomDep": {
@@ -228,6 +245,9 @@ game.module(
           that.mainBubble.anim.remove();
           game.rounds.nextRound("End");
         });
+      },
+      "onEnd": function(){
+
       }
     },
     "End":{
@@ -240,6 +260,9 @@ game.module(
         emitter.addTo(game.scene.stage);
         game.scene.addEmitter(emitter);
         // game.player.sprite.position.set(-999999, 99999);
+      },
+      "onEnd": function(){
+
       }
     },
     "youlost":{
@@ -252,6 +275,9 @@ game.module(
         emitter.addTo(game.scene.stage);
         game.scene.addEmitter(emitter);
         // game.player.sprite.position.set(-999999, 99999);
+      },
+      "onEnd": function(){
+
       }
     }
   };

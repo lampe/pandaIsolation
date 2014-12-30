@@ -9,7 +9,6 @@ game.module(
       this.anim.anchor.set(0.5, 0.5);
       this.anim.position.x = game.system.width/2;
       this.anim.position.y = game.system.height/2;
-      this.frameCounter = 0;
       this.anim.nextRound = properties.nextRound;
       this.anim.addTo(game.scene.stage);
       this.anim.play();
