@@ -17,6 +17,7 @@ game.module(
       this.anim.clicked = false;
       this.anim.nextRound = p.nextRound;
       this.anim.click = this.anim.tap = this.clickTap;
+      this.anim.costumeClickTap = p.costumeClickTap;
       this.anim.interactive = true;
       this.introAnimation(p);
       game.scene.addObject(this);
@@ -33,58 +34,62 @@ game.module(
       }
     },
     clickTap: function(){
-      if(this.clicked === false){
-        if(this.properties.type === "correctBubble"){
-          console.log("correct");
-          game.inRound.gotAllCorrect(this.properties);
-        }else if(this.properties.type === "smallerMakingBubble"){
-          game.inRound.mainBubble.anim.scale.x -= 0.10;
-          game.inRound.mainBubble.anim.scale.y -= 0.10;
-        }
-        if(this.properties.outroAnimation === "plop"){
-          this.tweenAlpha.stop();
-          this.tweenAlpha = new game.Tween(this.scale);
-          this.tweenAlpha.to({ "x": 0, "y": 0 }, 1000);
-          this.tweenAlpha.easing('Quadratic.InOut');
-          this.tweenAlpha.start();
-        }else if(this.properties.outroAnimation === "biggerPlop"){
-          this.tweenAlpha.stop();
-          this.tweenAlpha = new game.Tween(this.scale);
-          this.tweenAlpha.to({ "x": 2.0, "y": 2.0 }, 100);
-          this.tweenAlpha.easing('Quadratic.InOut');
-          this.tweenAlpha.start();
-          var that = this;
-          game.scene.addTimer(100, function(){
-            that.tweenAlpha.stop();
-            that.tweenAlpha = new game.Tween(that.scale);
-            that.tweenAlpha.to({ "x": 0, "y": 0 }, 800);
-            that.tweenAlpha.easing('Quadratic.InOut');
-            that.tweenAlpha.start();
-          })
-        }else{
-          game.audio.playSound("audio/clickbubble.wav");
-          this.tweenAlpha.stop();
-          this.tweenAlpha = new game.Tween(this.position);
-          this.tweenAlpha.to({ x: game.system.width/2, y: game.system.height/2 }, 1000);
-          this.tweenAlpha.easing('Quadratic.InOut');
-          this.tweenAlpha.start();
-          this.tweenAlpha = new game.Tween(this.scale);
-          this.tweenAlpha.to({ "x": 4, "y": 4 }, 1000);
-          this.tweenAlpha.easing('Quadratic.InOut');
-          this.tweenAlpha.start();
-          this.animationeTimer = new game.Timer();
-          var that = this;
-          game.scene.addTimer(1000, function(){
-            new game.AnimationBubble({
-              "asset":that.properties.clickedAnimation,
-              "x":0,
-              "y":game.system.height / 4,
-              "nextRound": that.nextRound
+      if(this.costumeClickTap){
+        this.costumeClickTap();
+      }else{
+        if(this.clicked === false){
+          if(this.properties.type === "correctBubble"){
+            console.log("correct");
+            game.inRound.gotAllCorrect(this.properties);
+          }else if(this.properties.type === "smallerMakingBubble"){
+            game.inRound.mainBubble.anim.scale.x -= 0.10;
+            game.inRound.mainBubble.anim.scale.y -= 0.10;
+          }
+          if(this.properties.outroAnimation === "plop"){
+            this.tweenAlpha.stop();
+            this.tweenAlpha = new game.Tween(this.scale);
+            this.tweenAlpha.to({ "x": 0, "y": 0 }, 1000);
+            this.tweenAlpha.easing('Quadratic.InOut');
+            this.tweenAlpha.start();
+          }else if(this.properties.outroAnimation === "biggerPlop"){
+            this.tweenAlpha.stop();
+            this.tweenAlpha = new game.Tween(this.scale);
+            this.tweenAlpha.to({ "x": 2.0, "y": 2.0 }, 100);
+            this.tweenAlpha.easing('Quadratic.InOut');
+            this.tweenAlpha.start();
+            var that = this;
+            game.scene.addTimer(100, function(){
+              that.tweenAlpha.stop();
+              that.tweenAlpha = new game.Tween(that.scale);
+              that.tweenAlpha.to({ "x": 0, "y": 0 }, 800);
+              that.tweenAlpha.easing('Quadratic.InOut');
+              that.tweenAlpha.start();
+            })
+          }else{
+            game.audio.playSound("audio/clickbubble.wav");
+            this.tweenAlpha.stop();
+            this.tweenAlpha = new game.Tween(this.position);
+            this.tweenAlpha.to({ x: game.system.width/2, y: game.system.height/2 }, 1000);
+            this.tweenAlpha.easing('Quadratic.InOut');
+            this.tweenAlpha.start();
+            this.tweenAlpha = new game.Tween(this.scale);
+            this.tweenAlpha.to({ "x": 4, "y": 4 }, 1000);
+            this.tweenAlpha.easing('Quadratic.InOut');
+            this.tweenAlpha.start();
+            this.animationeTimer = new game.Timer();
+            var that = this;
+            game.scene.addTimer(1000, function(){
+              new game.AnimationBubble({
+                "asset":that.properties.clickedAnimation,
+                "x":0,
+                "y":game.system.height / 4,
+                "nextRound": that.nextRound
+              });
+              that.remove();
+              that.runUpdate = false;
+              that.animationeTimer.pause();
             });
-            that.remove();
-            that.runUpdate = false;
-            that.animationeTimer.pause();
-          });
+          }
         }
       }
       this.clicked = true;
