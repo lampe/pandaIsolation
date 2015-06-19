@@ -7,10 +7,10 @@ game.module(
       this.staticBg1 = new game.Sprite('images/hintergrund.jpg',game.system.width/2,game.system.height/2);
       this.staticBg1.anchor.set(0.5, 0.5);
       this.bgContainer.addChild(this.staticBg1); // Add the background to the bg container
-      this.staticBg2 = new game.Sprite('images/hintergrund_saturn.png',game.system.width/2,game.system.height/2);
-      this.staticBg2.anchor.set(0.5, 0.5);
-      this.bgContainer.addChild(this.staticBg2); // Add the background to the bg container
-      
+      // this.staticBg2 = new game.Sprite('images/hintergrund_saturn.png',game.system.width/2,game.system.height/2);
+      // this.staticBg2.anchor.set(0.5, 0.5);
+      // this.bgContainer.addChild(this.staticBg2); // Add the background to the bg container
+
       this.levelBg = new game.TilingSprite('images/sterne512.png',game.system.width,game.system.height);
       this.levelBg.position.set(game.system.width/2, game.system.height/2);
       this.levelBg.anchor.set(0.5, 0.5);
@@ -36,7 +36,7 @@ game.module(
       // this.levelBg6.anchor.set(0.5, 0.5);
 
       this.bgContainer.addChild(this.levelBg); // Add the background to the bg container
-      this.bgContainer.addChild(this.levelBg2); // Add the background to the bg container
+      // this.bgContainer.addChild(this.levelBg2); // Add the background to the bg container
       this.bgContainer.addChild(this.levelBg3);
       this.bgContainer.addChild(this.levelBg4);
       // this.bgContainer.addChild(this.levelBg5);
@@ -45,17 +45,16 @@ game.module(
       game.scene.addObject(this);
       game.switchPlayer = function(object){
         game.player = new game.Player('images/naut_sadtest.png',game.system.width / 4, game.system.height / 2);
-        console.log(object)
         object.sprite.position = { x: -9999, y: -9999};
         object.sprite.runUpdate = false;
       };
       // console.log(this.levelBg.position, this.levelBg.texture.width * this.levelBg.scale.x);
     },
     update: function() {
-      this.levelBg.position.x -= 5;
-      this.levelBg2.position.x -= 5;
-      this.levelBg3.position.x -= 3;
-      this.levelBg4.position.x -= 3;
+      this.levelBg.position.x -= 1;
+      this.levelBg2.position.x -= 0.5;
+      this.levelBg3.position.x -= 0.5;
+      this.levelBg4.position.x -= 0.5;
       // this.levelBg5.position.x -= 1;
       // this.levelBg6.position.x -= 1;
       if(this.levelBg.position.x <= -(game.system.width-(game.system.width/2))){

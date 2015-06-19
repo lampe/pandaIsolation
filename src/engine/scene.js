@@ -13,7 +13,7 @@ game.module(
     @class Scene
     @extends game.Class
 **/
-game.Scene = game.Class.extend({
+game.createClass('Scene', {
     /**
         Background color of scene.
         @property {Number} backgroundColor
@@ -75,36 +75,35 @@ game.Scene = game.Class.extend({
         game.system.stage.mouseout = this.mouseout.bind(this);
 
         this.stage = new game.Container();
+        if (game.system.webGL && game.device.cocoonJS) {
+            var rendererRatio = game.renderer.width / game.renderer.height;
+            var systemRatio = game.system.width / game.system.height;
+            if (rendererRatio < systemRatio) {
+                var scale = game.renderer.width / game.system.width;
+                this.stage.scale.set(scale, scale);
+                this.stage.position.y = game.renderer.height / 2 - game.system.height * scale / 2;
+            }
+            else {
+                var scale = game.renderer.height / game.system.height;
+                this.stage.scale.set(scale, scale);
+                this.stage.position.x = game.renderer.width / 2 - game.system.width * scale / 2;
+            }
+        }
         game.system.stage.addChild(this.stage);
 
         if (game.debugDraw) game.debugDraw.reset();
     },
-    
+
     /**
-        This is called every frame.
-        @method update
+        Clear stage.
+        @method clear
     **/
-    update: function() {
-        var i;
-        if (this.world) this.world.update();
-        for (i = this.timers.length - 1; i >= 0; i--) {
-            if (this.timers[i].time() >= 0) {
-                if (typeof this.timers[i].callback === 'function') this.timers[i].callback();
-                if (this.timers[i].repeat) this.timers[i].reset();
-                else this.timers.splice(i, 1);
-            }
-        }
-        for (i = this.emitters.length - 1; i >= 0; i--) {
-            this.emitters[i].update();
-            if (this.emitters[i]._remove) this.emitters.splice(i, 1);
-        }
-        if (game.tweenEngine) game.tweenEngine.update();
-        for (i = this.objects.length - 1; i >= 0; i--) {
-            if (typeof this.objects[i].update === 'function') this.objects[i].update();
-            if (this.objects[i]._remove) this.objects.splice(i, 1);
+    clear: function() {
+        for (var i = this.stage.children.length - 1; i >= 0; i--) {
+            this.stage.removeChild(this.stage.children[i]);
         }
     },
-
+    
     /**
         Add object to scene, so it's `update()` function get's called every frame.
         @method addObject
@@ -165,6 +164,7 @@ game.Scene = game.Class.extend({
         @param {Boolean} doCallback
     **/
     removeTimer: function(timer, doCallback) {
+        if (!timer) return;
         if (!doCallback) timer.callback = null;
         timer.repeat = false;
         timer.set(0);
@@ -289,6 +289,31 @@ game.Scene = game.Class.extend({
         @method exit
     **/
     exit: function() {
+    },
+
+    /**
+        This is called every frame.
+        @method update
+    **/
+    update: function() {
+        var i;
+        if (game.tweenEngine) game.tweenEngine.update();
+        if (this.world) this.world.update();
+        for (i = this.timers.length - 1; i >= 0; i--) {
+            if (this.timers[i].time() >= 0) {
+                if (typeof this.timers[i].callback === 'function') this.timers[i].callback();
+                if (this.timers[i].repeat) this.timers[i].reset();
+                else this.timers.splice(i, 1);
+            }
+        }
+        for (i = this.emitters.length - 1; i >= 0; i--) {
+            this.emitters[i].update();
+            if (this.emitters[i]._remove) this.emitters.splice(i, 1);
+        }
+        for (i = this.objects.length - 1; i >= 0; i--) {
+            if (typeof this.objects[i].update === 'function') this.objects[i].update();
+            if (this.objects[i]._remove) this.objects.splice(i, 1);
+        }
     }
 });
 

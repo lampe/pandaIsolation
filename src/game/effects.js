@@ -47,5 +47,47 @@ game.module(
 
     this.shake[0].start();
   };
-
+  game.effects.Displacement = {};
+  game.effects.Displacement.isStarted = false;
+  game.effects.Displacement.start = function(){
+    var displacementTexture = game.PIXI.Texture.fromImage("http://i.imgur.com/2yYayZk.png");
+    this.displacementFilter = new game.PIXI.DisplacementFilter(displacementTexture);
+    this.isStarted = true;
+    this.displacementFilter.type = "displacement";
+    game.scene.stage.filters = [this.displacementFilter];
+  };
+  game.effects.Displacement.stop = function(){
+    game.scene.stage.filters = null;
+    // for (var i = 0; i < game.scene.stage.filters.length; i++) {
+    //   if(game.scene.stage.filters[i].type === "displacement"){
+    //     game.scene.stage.filters.splice(i, 1);
+    //     // delete game.scene.stage.filters[i];
+    //   }
+    // }
+  };
+  game.effects.CameraWabbel = {};
+  game.effects.CameraWabbel.start = function(){
+    game.effects.CameraWabbel.directions = ["ne","se","nw","sw"];
+    game.effects.CameraWabbel.directionsTimer = 0;
+    game.effects.CameraWabbel.directionsBackToCenter = true;
+    game.effects.CameraWabbel.directionsDuration = 300;
+    game.effects.CameraWabbel.directionsDistance = 20;
+    game.effects.CameraWabbel.directionsBackPosition = {};
+    game.effects.CameraWabbel.currentDirection = game.effects.CameraWabbel.directions[Math.floor(Math.random() * game.effects.CameraWabbel.directions.length)];
+    game.effects.CameraWabbel.isStarted = true;
+  };
+  game.effects.CameraWabbel.stop = function(){
+    game.effects.CameraWabbel.isStarted = false;
+  };
+  game.effects.CameraWabbel.easeInOut = function(t, b, c, d) {
+      if ((t /= d / 2) < 1) return c / 2 * t * t * t + b;
+      return c / 2 * ((t -= 2) * t * t + 2) + b;
+    }
+  // bf = new game.PIXI.DisplacementFilter();
+  // pf = new game.PIXI.PixelateFilter()
+  // game.scene.bg.bgContainer.filters = [bf,pf]
+  // game.player.anim.filters = [bf,pf]
+  // game.audio.playMusic('music');
+  // game.audio.setMusicVolume(0.4);
+  // game.effects.shakeitbaby(10,100,10);
 });

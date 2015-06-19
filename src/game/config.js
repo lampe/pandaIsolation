@@ -1,7 +1,6 @@
 pandaConfig = {
   name: 'MyPandaGame',
   version: '0.0.2',
-
   system: {
     width: 1280,
     height: 720,

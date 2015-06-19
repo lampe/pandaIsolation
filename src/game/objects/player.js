@@ -3,41 +3,80 @@ game.module(
 ).body(function() {
   game.createClass('Player', {
     init: function(properties) {
+      this.container = new game.Container().addTo(game.scene.stage);
+      this.j = undefined;
+      this.i = undefined;
+      this.isPlaying = false;
+      this.rotation = 0;
       p = this.properties = properties;
-      console.log(p);
-      this.spriteSheet = new game.SpriteSheet(p.asset, p.spriteSize.x, p.spriteSize.y);
-      this.anim = this.spriteSheet.anim(this.spriteSheet.textures.length, 0);
-      this.anim.animationSpeed = 0.1;
-      this.anim.play();
-      this.anim.position.x = p.position.x;
-      this.anim.position.y = p.position.y;
-      this.anim.anchor.set(0.5, 0.5);
-      // this.anim.scale.x = 0.65;
-      // this.anim.scale.y = 0.65;
-      this.sanity = 0;
-      this.anim.addTo(game.scene.stage);
+      this.sprite = [];
+      for (var i = 1; i <= p.animationFrames; i++) {
+        this.sprite[i] = new game.Sprite(p.path + i + ".png");
+        this.sprite[i].position.x = p.position.x;
+        this.sprite[i].position.y = p.position.y;
+        this.sprite[i].scale.set(0.75, 0.75);
+        this.sprite[i].anchor = {
+          x: 0.25,
+          y: 0.48
+        };
+      }
       game.scene.addObject(this);
+      this.play();
     },
-    // update: function() {
-    //   if (game.accelerometer) {
-    //     this.sprite.position.x -= game.accelerometer.y * game.system.delta * 50;
-    //     this.sprite.position.y -= game.accelerometer.x * game.system.delta * 50;
-    //   }
-    // }
-    changePlayerAnimatoin: function(properties){
-      pNew = properties;
-      this.anim.remove();
-      this.spriteSheet = new game.SpriteSheet(properties.asset, properties.spriteSize.x, properties.spriteSize.y);
-      this.anim = this.spriteSheet.anim(this.spriteSheet.textures.length, 0);
-      this.anim.animationSpeed = 0.1;
-      this.anim.play();
-      this.anim.position.x = pNew.position.x;
-      this.anim.position.y = pNew.position.y;
-      this.anim.anchor.set(0.5, 0.5);
-      console.log(this.anim,this.spriteSheet.textures.length-1)
-      this.anim.addTo(game.scene.stage);
-      this.properties = properties;
-      game.scene.addObject(this);
+    update: function() {
+      if (this.isPlaying === true) {
+        if (this.properties.animationFrames < this.i) {
+          this.i = 1;
+          this.j = 1;
+          if(this.runOnce === false){
+            this.runOnce = true;
+            if(this.cb){
+              this.cb();
+            }
+          }
+        }
+        if (this.j % 3 === 1) {
+          if (this.i - 1 !== 0) {
+            game.scene.stage.removeChild(this.sprite[this.i - 1]);
+          } else {
+            game.scene.stage.removeChild(this.sprite[this.properties.animationFrames]);
+          }
+          game.scene.stage.addChild(this.sprite[this.i]);
+          this.rotation += 0.022;
+          this.sprite[this.i].rotation = this.rotation;
+          this.i = this.i + 1;
+        }
+        this.j = this.j + 1;
+      }
+    },
+    play: function() {
+      this.i = 1;
+      this.j = 1;
+      this.isPlaying = true;
+    },
+    changePlayerAnimatoin: function(path, animationFrames, cb) {
+      var i = 1;
+      for (i = 1; i <= this.properties.animationFrames; i++) {
+        game.scene.stage.removeChild(this.sprite[i]);
+      }
+      this.cb = cb;
+      this.properties.path = path;
+      this.properties.animationFrames = animationFrames;
+      this.sprite = [];
+      for (i = 1; i <= this.properties.animationFrames; i++) {
+        this.sprite[i] = new game.Sprite(this.properties.path + i + ".png");
+        this.sprite[i].position.x = this.properties.position.x;
+        this.sprite[i].position.y = this.properties.position.y;
+        this.sprite[i].scale.set(0.75, 0.75);
+        this.sprite[i].anchor = {
+          x: 0.5,
+          y: 0.5
+        };
+      }
+      this.play();
+      this.j = 1;
+      this.i = 1;
+      this.runOnce = false;
     }
   });
 });

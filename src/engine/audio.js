@@ -12,7 +12,7 @@ game.module(
     @class Audio
     @extends game.Class
 **/
-game.Audio = game.Class.extend({
+game.createClass('Audio', {
     audioId: 1,
     audioObjects: {},
     systemPaused: [],
@@ -201,7 +201,7 @@ game.Audio = game.Class.extend({
             audio.onended = this._onended.bind(this, audioId);
 
             var gainNode = this.context.createGain ? this.context.createGain() : this.context.createGainNode();
-            gainNode.gain.value = typeof volume === 'number' ? volume : 1;
+            gainNode.gain.value = typeof volume === 'number' ? volume : 1;
             gainNode.connect(this.gainNode);
             audio.connect(gainNode);
             audio.gainNode = gainNode;
@@ -213,7 +213,7 @@ game.Audio = game.Class.extend({
         }
         // HTML5 Audio
         else {
-            this.sources[name].audio.volume = typeof volume === 'number' ? volume : 1;
+            this.sources[name].audio.volume = typeof volume === 'number' ? volume : 1;
             this.sources[name].audio.loop = loop;
             this.sources[name].audio.playing = true;
             this.sources[name].audio.callback = callback;
@@ -235,6 +235,7 @@ game.Audio = game.Class.extend({
 
         // Web Audio
         if (this.context) {
+            if (audio.pauseTime >= 0) return false;
             if (typeof audio.stop === 'function') audio.stop(0);
             else audio.noteOff(0);
         }
@@ -274,7 +275,7 @@ game.Audio = game.Class.extend({
 
         // Web Audio
         if (this.context) {
-            if (audio.pauseTime) {
+            if (audio.pauseTime >= 0) {
                 var audioName = this._getNameForAudio(audio);
                 this._play(audioName, audio.loop, audio.gainNode.gain.value, audio.callback, audio.playbackRate, audio.pauseTime, id);
             }
@@ -311,7 +312,7 @@ game.Audio = game.Class.extend({
 
         // Web Audio
         if (this.context) {
-            audio.gainNode.gain.value = volume || 1;
+            audio.gainNode.gain.value = volume || 1;
         }
         // HTML5 Audio
         else {
@@ -607,7 +608,7 @@ game.Audio = game.Class.extend({
     setPlaybackRate: function(id, rate) {
         if (this.context) {
             var audio = this.audioObjects[id];
-            if (audio) audio.playbackRate.value = rate || 1;
+            if (audio) audio.playbackRate.value = rate || 1;
         }
     },
 
@@ -676,44 +677,46 @@ game.Audio = game.Class.extend({
     }
 });
 
-/**
-    Enable audio.
-    @attribute {Boolean} enabled
-    @default true
-**/
-game.Audio.enabled = true;
-/**
-    Enable Web Audio.
-    @attribute {Boolean} webAudio
-    @default true
-**/
-game.Audio.webAudio = true;
-/**
-    List of available audio formats.
-    @attribute {Array} formats
-**/
-game.Audio.formats = [
-    { ext: 'm4a', type: 'audio/mp4; codecs="mp4a.40.5"' },
-    { ext: 'ogg', type: 'audio/ogg; codecs="vorbis"' },
-    { ext: 'wav', type: 'audio/wav' }
-];
-/**
-    Stop audio, when changing scene.
-    @attribute {Boolean} stopOnSceneChange
-    @default true
-**/
-game.Audio.stopOnSceneChange = true;
-/**
-    Sound volume.
-    @attribute {Number} soundVolume
-    @default 1
-**/
-game.Audio.soundVolume = 1;
-/**
-    Music volume.
-    @attribute {Number} musicVolume
-    @default 1
-**/
-game.Audio.musicVolume = 1;
+game.addAttributes('Audio', {
+    /**
+        Enable audio.
+        @attribute {Boolean} enabled
+        @default true
+    **/
+    enabled: true,
+    /**
+        Enable Web Audio.
+        @attribute {Boolean} webAudio
+        @default true
+    **/
+    webAudio: true,
+    /**
+        List of available audio formats.
+        @attribute {Array} formats
+    **/
+    formats: [
+        { ext: 'ogg', type: 'audio/ogg; codecs="vorbis"' },
+        { ext: 'm4a', type: 'audio/mp4; codecs="mp4a.40.5"' },
+        { ext: 'wav', type: 'audio/wav' }
+    ],
+    /**
+        Stop audio, when changing scene.
+        @attribute {Boolean} stopOnSceneChange
+        @default true
+    **/
+    stopOnSceneChange: true,
+    /**
+        Sound volume.
+        @attribute {Number} soundVolume
+        @default 1
+    **/
+    soundVolume: 1,
+    /**
+        Music volume.
+        @attribute {Number} musicVolume
+        @default 1
+    **/
+    musicVolume: 1
+});
 
 });
