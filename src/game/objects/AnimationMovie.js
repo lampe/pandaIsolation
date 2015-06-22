@@ -3,7 +3,6 @@ game.module(
 ).body(function() {
   game.createClass('AnimationMovie', {
     init: function(properties) {
-      console.log(properties)
       this.container = new game.Container().addTo(game.scene.stage);
       this.j = undefined;
       this.i = undefined;

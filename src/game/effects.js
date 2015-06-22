@@ -54,7 +54,8 @@ game.module(
     this.displacementFilter = new game.PIXI.DisplacementFilter(displacementTexture);
     this.isStarted = true;
     this.displacementFilter.type = "displacement";
-    game.scene.stage.filters = [this.displacementFilter];
+    // game.scene.stage.filters = [this.displacementFilter];
+    game.scene.bg.bgContainer.filters = [this.displacementFilter];
   };
   game.effects.Displacement.stop = function(){
     game.scene.stage.filters = null;

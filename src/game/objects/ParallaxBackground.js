@@ -2,79 +2,99 @@ game.module(
   'game.objects.ParallaxBackground'
 ).body(function() {
   game.createClass("ParallaxBackground", {
-    init: function(){
+    init: function() {
       this.bgContainer = new game.Container().addTo(game.scene.stage);
-      this.staticBg1 = new game.Sprite('images/hintergrund.jpg',game.system.width/2,game.system.height/2);
+      this.staticBg1 = new game.Sprite('images/hintergrund.jpg', game.system.width / 2, game.system.height / 2);
       this.staticBg1.anchor.set(0.5, 0.5);
-      this.bgContainer.addChild(this.staticBg1); // Add the background to the bg container
-      // this.staticBg2 = new game.Sprite('images/hintergrund_saturn.png',game.system.width/2,game.system.height/2);
-      // this.staticBg2.anchor.set(0.5, 0.5);
-      // this.bgContainer.addChild(this.staticBg2); // Add the background to the bg container
+      this.staticBg1.name = "staticBg1";
+      this.bgContainer.addChild(this.staticBg1);
+      this.staticD1 = new game.Sprite('images/hintergrund_d1.jpg', game.system.width / 2, game.system.height / 2);
+      this.staticD1.anchor.set(0.5, 0.5);
+      this.staticD1.alpha = 0;
+      this.staticD1.name = "staticD1";
+      this.bgContainer.addChild(this.staticD1);
+      this.staticD2 = new game.Sprite('images/hintergrund_d2.jpg', game.system.width / 2, game.system.height / 2);
+      this.staticD2.anchor.set(0.5, 0.5);
+      this.staticD2.alpha = 0;
+      this.staticD2.name = "staticD2";
+      this.bgContainer.addChild(this.staticD2);
+      this.staticM1 = new game.Sprite('images/hintergrund_m1.jpg', game.system.width / 2, game.system.height / 2);
+      this.staticM1.anchor.set(0.5, 0.5);
+      this.staticM1.alpha = 0;
+      this.staticM1.name = "staticM1";
+      this.bgContainer.addChild(this.staticM1);
+      this.staticM2 = new game.Sprite('images/hintergrund_m2.jpg', game.system.width / 2, game.system.height / 2);
+      this.staticM2.anchor.set(0.5, 0.5);
+      this.staticM2.alpha = 0;
+      this.staticM2.name = "staticM2";
+      this.bgContainer.addChild(this.staticM2);
 
-      this.levelBg = new game.TilingSprite('images/sterne512.png',game.system.width,game.system.height);
-      this.levelBg.position.set(game.system.width/2, game.system.height/2);
+      this.levelBg = new game.TilingSprite('images/sterne512.png', game.system.width, game.system.height);
+      this.levelBg.position.set(game.system.width / 2, game.system.height / 2);
       this.levelBg.anchor.set(0.5, 0.5);
+      this.levelBg.alpha = 0.7;
 
-      this.levelBg2 = new game.TilingSprite('images/sterne512.png',game.system.width,game.system.height);
-      this.levelBg2.position.set((game.system.width+(game.system.width/2)), game.system.height/2);
+      this.levelBg2 = new game.TilingSprite('images/sterne512.png', game.system.width, game.system.height);
+      this.levelBg2.position.set(game.system.width + (game.system.width / 2), game.system.height / 2);
       this.levelBg2.anchor.set(0.5, 0.5);
+      this.levelBg2.alpha = 0.5;
 
-      this.levelBg3 = new game.TilingSprite('images/sterne256.png',game.system.width,game.system.height);
-      this.levelBg3.position.set(game.system.width/2, game.system.height/2);
+      this.levelBg3 = new game.TilingSprite('images/sterne1024.png', game.system.width, game.system.height);
+      this.levelBg3.position.set(game.system.width / 2, game.system.height / 2);
       this.levelBg3.anchor.set(0.5, 0.5);
+      this.levelBg3.alpha = 0.5;
 
-      this.levelBg4 = new game.TilingSprite('images/sterne256.png',game.system.width,game.system.height);
-      this.levelBg4.position.set((game.system.width+(game.system.width/2)), game.system.height/2);
+      this.levelBg4 = new game.TilingSprite('images/sterne1024.png', game.system.width, game.system.height);
+      this.levelBg4.position.set(game.system.width + (game.system.width / 2), game.system.height / 2);
       this.levelBg4.anchor.set(0.5, 0.5);
+      this.levelBg4.alpha = 0.5;
 
-      // this.levelBg5 = new game.TilingSprite('images/BG_Layer3.png',game.system.width,game.system.height);
-      // this.levelBg5.position.set(game.system.width/2, game.system.height/2);
-      // this.levelBg5.anchor.set(0.5, 0.5);
-      //
-      // this.levelBg6 = new game.TilingSprite('images/BG_Layer3.png',game.system.width,game.system.height);
-      // this.levelBg6.position.set((game.system.width+(game.system.width/2)), game.system.height/2);
-      // this.levelBg6.anchor.set(0.5, 0.5);
 
-      this.bgContainer.addChild(this.levelBg); // Add the background to the bg container
-      // this.bgContainer.addChild(this.levelBg2); // Add the background to the bg container
+      this.bgContainer.addChild(this.levelBg);
+      this.bgContainer.addChild(this.levelBg2);
       this.bgContainer.addChild(this.levelBg3);
       this.bgContainer.addChild(this.levelBg4);
-      // this.bgContainer.addChild(this.levelBg5);
-      // this.bgContainer.addChild(this.levelBg6);
-
+      this.currentBackground = this.staticBg1;
       game.scene.addObject(this);
-      game.switchPlayer = function(object){
-        game.player = new game.Player('images/naut_sadtest.png',game.system.width / 4, game.system.height / 2);
-        object.sprite.position = { x: -9999, y: -9999};
-        object.sprite.runUpdate = false;
-      };
-      // console.log(this.levelBg.position, this.levelBg.texture.width * this.levelBg.scale.x);
+    },
+    changeBackground: function(bg) {
+      console.log(this.currentBackground);
+      if(this.currentBackground.name === bg){
+        return false;
+      }
+      this.tweenOut = new game.Tween(this.currentBackground);
+      this.tweenOut.easing('Quadratic.InOut');
+      this.tweenOut.to({
+        alpha: 0
+      }, 3000);
+      this.tweenOut.start();
+
+      this.tweenIn = new game.Tween(this[bg]);
+      this.tweenIn.easing('Quadratic.InOut');
+      this.tweenIn.start();
+      this.tweenIn.to({
+        alpha: 1
+      }, 3000);
+      this.currentBackground = this[bg];
     },
     update: function() {
-      this.levelBg.position.x -= 1;
-      this.levelBg2.position.x -= 0.5;
-      this.levelBg3.position.x -= 0.5;
-      this.levelBg4.position.x -= 0.5;
-      // this.levelBg5.position.x -= 1;
-      // this.levelBg6.position.x -= 1;
-      if(this.levelBg.position.x <= -(game.system.width-(game.system.width/2))){
-        this.levelBg.position.set((game.system.width+(game.system.width/2)), game.system.height/2);
+      this.levelBg.position.x -=  1.5;
+      this.levelBg2.position.x -= 1.5;
+      this.levelBg3.position.x -= 5.0;
+      this.levelBg4.position.x -= 5.0;
+
+      if (this.levelBg.position.x <= -(game.system.width - (game.system.width / 2))) {
+        this.levelBg.position.set((game.system.width + (game.system.width / 2)), game.system.height / 2);
       }
-      if(this.levelBg2.position.x <= -(game.system.width-(game.system.width/2))){
-        this.levelBg2.position.set((game.system.width+(game.system.width/2)), game.system.height/2);
+      if (this.levelBg2.position.x <= -(game.system.width - (game.system.width / 2))) {
+        this.levelBg2.position.set((game.system.width + (game.system.width / 2)), game.system.height / 2);
       }
-      if(this.levelBg3.position.x <= -(game.system.width-(game.system.width/2))){
-        this.levelBg3.position.set((game.system.width+(game.system.width/2)), game.system.height/2);
+      if (this.levelBg3.position.x <= -(game.system.width - (game.system.width / 2))) {
+        this.levelBg3.position.set((game.system.width + (game.system.width / 2)), game.system.height / 2);
       }
-      if(this.levelBg4.position.x <= -(game.system.width-(game.system.width/2))){
-        this.levelBg4.position.set((game.system.width+(game.system.width/2)), game.system.height/2);
+      if (this.levelBg4.position.x <= -(game.system.width - (game.system.width / 2))) {
+        this.levelBg4.position.set((game.system.width + (game.system.width / 2)), game.system.height / 2);
       }
-      // if(this.levelBg5.position.x <= -(game.system.width-(game.system.width/2))){
-      //   this.levelBg5.position.set((game.system.width+(game.system.width/2)), game.system.height/2);
-      // }
-      // if(this.levelBg6.position.x <= -(game.system.width-(game.system.width/2))){
-      //   this.levelBg6.position.set((game.system.width+(game.system.width/2)), game.system.height/2);
-      // }
     }
   });
 });

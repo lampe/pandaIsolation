@@ -4,8 +4,8 @@ game.module(
   .body(function() {
     game.rounds = {
       "start": function() {
-        game.rounds.round1.start();
-        game.inRound = game.rounds.round1;
+        game.rounds.round7.start();
+        game.inRound = game.rounds.round7;
       },
       "nextRound": function(round) {
         console.log("changing to round: ", round);
@@ -36,10 +36,11 @@ game.module(
       "round1": {
         "bubbles": [],
         "start": function() {
+          game.scene.bg.changeBackground("staticBg1");
           this.bubbles.push(new game.Bubble({
             "asset": "images/b_crash/b_crash.png",
-            "clickedAnimation": "images/t_minishiba/t_minishiba_",
-            "animationFrames": 201,
+            "clickedAnimation": "images/t_crash/t_crash_",
+            "animationFrames": 1,
             "x": -250,
             "y": 0,
             "playerTransitionAnimation": {
@@ -53,11 +54,12 @@ game.module(
             "clickedAnimation": 'images/thought_talk.png',
             "x": 250,
             "y": 0,
-            "nextRound": "round2"
+            "isFake": true
           }));
         },
         "onEnd": function() {
           game.rounds.removeBubbles();
+          game.scene.bg.changeBackground("staticD1");
         }
       },
       "round2": {
@@ -65,16 +67,30 @@ game.module(
         "start": function() {
           game.player.changePlayerAnimatoin("images/c_idle/c_idle_", 20, function() {});
           this.bubbles.push(new game.Bubble({
-            "asset": "images/b_minishiba/b_minishiba.png",
-            "clickedAnimation": "images/t_minishiba/t_minishiba_",
+            "asset": "images/b_panic/b_panic.png",
             "animationFrames": 201,
             "x": -250,
             "y": 0,
-            "playerTransitionAnimation": {
-              "path": "images/c_depr_trans/c_depr_",
-              "animationFrames": 70
+            "costumeClickTap": function() {
+              game.rounds.removeBubbles();
+              game.scene.bg.changeBackground("staticD2");
+              var tween = new game.Tween(this);
+              tween.to({
+                alpha: 0
+              }, 1000);
+              tween.easing('Quadratic.InOut');
+              tween.start();
+              tween.onComplete(function() {
+                game.rounds.nextRound("randomDep");
+              });
             },
-            "nextRound": "round3"
+            "nextRound": "randomDep"
+          }));
+          this.bubbles.push(new game.Bubble({
+            "asset": "images/b_saturn/b_saturn.png",
+            "x": 250,
+            "y": 0,
+            "isFake": true
           }));
         },
         "onEnd": function() {
@@ -84,7 +100,18 @@ game.module(
       "round3": {
         "bubbles": [],
         "start": function() {
-          game.player.changePlayerAnimatoin("images/c_idle/c_idle_", 20, function() {});
+          this.bubbles.push(new game.Bubble({
+            "asset": "images/b_alone/b_alone.png",
+            "clickedAnimation": "images/t_alone/t_alone_",
+            "animationFrames": 40,
+            "x": -250,
+            "y": 0,
+            "playerTransitionAnimation": {
+              "path": "images/c_sadrepair/c_sadrepair_",
+              "animationFrames": 255
+            },
+            "nextRound": "zwischenSequenz2"
+          }));
         },
         "onEnd": function() {
           game.rounds.removeBubbles();
@@ -96,20 +123,159 @@ game.module(
         "start": function() {
           game.antenne = new game.Sprite('images/antenne.png');
           game.antenne.position.set(50, 80);
-          game.antenne.anchor.set(0.5, 0.5);
+          game.antenne.scale.set(0.75, 0.75);
+          game.antenne.anchor.set(0.25, 0.48);
           game.antenne.addTo(game.scene.stage);
           game.scene.addObject(game.antenne);
           game.antenne.remoeved = false;
-            // game.player.changePlayerAnimatoin("images/c_antennacatch/c_antennacatch_", 322, function() {});
+          // game.player.changePlayerAnimatoin("images/c_antennacatch/c_antennacatch_", 322, function() {});
         },
         "onEnd": function() {
           game.rounds.removeBubbles();
         }
       },
-      "round4": {
+      "zwischenSequenz2": {
+        "name": "zwischenSequenz2",
         "bubbles": [],
         "start": function() {
-          game.player.changePlayerAnimatoin("images/c_sadrepair/c_sadrepair_", 255, function() {});
+          // game.antenne = new game.Sprite('images/antenne.png');
+          // game.antenne.position.set(50, 80);
+          // game.antenne.scale.set(0.75, 0.75);
+          // game.antenne.anchor.set(0.25, 0.48);
+          // game.antenne.addTo(game.scene.stage);
+          // game.scene.addObject(game.antenne);
+          // game.antenne.remoeved = false;
+          game.player.changePlayerAnimatoin("images/c_sosstart/c_sosstart_", 198, function() {});
+        },
+        "onEnd": function() {
+
+        }
+      },
+      "zwischenSequenz3": {
+        "name": "zwischenSequenz3",
+        "bubbles": [],
+        "start": function() {
+          // game.antenne = new game.Sprite('images/antenne.png');
+          // game.antenne.position.set(50, 80);
+          // game.antenne.scale.set(0.75, 0.75);
+          // game.antenne.anchor.set(0.25, 0.48);
+          // game.antenne.addTo(game.scene.stage);
+          // game.scene.addObject(game.antenne);
+          // game.antenne.remoeved = false;
+          game.player.changePlayerAnimatoin("images/c_sosconfirmed/c_sosconfirmed_", 144, function() {});
+        },
+        "onEnd": function() {
+
+        }
+      },
+      "round4": {
+        "name": "runde4",
+        "bubbles": [],
+        "start": function() {
+          this.bubbles.push(new game.Bubble({
+            "asset": "images/b_sinkship/b_sinkship.png",
+            "clickedAnimation": "images/t_sinkship/t_sinkship_",
+            "animationFrames": 104,
+            "x": -250,
+            "y": 0,
+            "playerTransitionAnimation": {
+              "path": "images/c_thoughtshake/c_thoughtshake_",
+              "animationFrames": 68
+            },
+            "nextRound": "round5"
+          }));
+          // game.player.changePlayerAnimatoin("images/c_sadrepair/c_sadrepair_", 255, function() {});
+        },
+        "onEnd": function() {
+          game.scene.bg.changeBackground("staticD1");
+          game.rounds.removeBubbles();
+        }
+      },
+      "round5": {
+        "name": "runde5",
+        "bubbles": [],
+        "start": function() {
+          game.player.changePlayerAnimatoin("images/c_sos_idle/c_sos_idle_", 8, function() {});
+          this.bubbles.push(new game.Bubble({
+            "asset": "images/b_onboard/b_onboard.png",
+            "clickedAnimation": "images/t_onboard/t_onboard_",
+            "animationFrames": 318,
+            "x": -250,
+            "y": 0,
+            "playerTransitionAnimation": {
+              "path": "images/c_idle/c_idle_",
+              "animationFrames": 20
+            },
+            "nextRound": "zwischenSequenz3"
+          }));
+          // game.player.changePlayerAnimatoin("images/c_sadrepair/c_sadrepair_", 255, function() {});
+        },
+        "onEnd": function() {
+          game.scene.bg.changeBackground("staticBg1");
+          game.rounds.removeBubbles();
+        }
+      },
+      "round6": {
+        "name": "round6",
+        "bubbles": [],
+        "start": function() {
+          this.bubbles.push(new game.Bubble({
+            "type": "correct",
+            "asset": "images/b_minishiba/b_minishiba.png",
+            "clickedAnimation": "images/t_minishiba/t_minishiba_",
+            "animationFrames": 1,
+            "x": -250,
+            "y": 0,
+            "playerTransitionAnimation": {
+              "path": "images/c_lol+lose/c_lol+lose_",
+              "animationFrames": 169
+            },
+            "nextRound": "round7"
+          }));
+        },
+        "onEnd": function() {
+          game.scene.bg.changeBackground("staticM1");
+
+          game.rounds.removeBubbles();
+        }
+      },
+      "round7": {
+        "name": "round7",
+        "bubbles": [],
+        "start": function() {
+          game.player.changePlayerAnimatoin("images/c_manic_idle/c_manic_idle_", 81, function() {});
+          game.shiba = new game.Shiba({
+            "path": 'images/b_shibapull/b_shibapull_',
+            "animationFrames": 8,
+            "position": {
+              "x": game.player.sprite[game.player.i].position.x + 520,
+              "y": game.player.sprite[game.player.i].position.y
+            },
+            "rotation": 0,
+            "rotationValue": 0,
+            "spriteSize": {
+              "x": 140,
+              "y": 238
+            },
+            "clickTap": function() {
+              // game.player.rotationValue = 0;
+              // tween = new game.Tween(game.player.container);
+              // tween.to({
+              //   rotation: 2
+              // }, 1000);
+              // tween.start();
+              game.player.movePlayerForward = true;
+              game.player.clickedOnShiba = true;
+              game.scene.bg.changeBackground("staticM2");
+            }
+          });
+
+          this.bubbles.push(new game.Bubble({
+            "asset": "images/b_shiba/b_shiba.png",
+            "x": -250,
+            "y": 0,
+            "isFake": true
+          }));
         },
         "onEnd": function() {
           game.rounds.removeBubbles();
@@ -121,16 +287,17 @@ game.module(
         "start": function() {
           var that = this;
           var assets = [];
-          assets.push("images/bubble_toast_animsheet.png");
-          assets.push("images/bubble_test_animsheet.png");
-          assets.push("images/bubble_talk.png");
+          assets.push("images/b_minishiba/b_minishiba.png");
+          assets.push("images/b_panic/b_panic.png");
+          assets.push("images/b_onboard/b_onboard.png");
           for (var i = 0; i < 40; i++) {
             game.scene.addTimer(Math.floor(Math.random() * 12000) + 100, function() {
               if (that.won === false) {
                 that.falseBubbles.push(new game.Bubble({
                   "type": "falseBubble",
                   "asset": assets[Math.floor(Math.random() * assets.length) + 0],
-                  "clickedAnimation": "images/thought_test.png",
+                  "clickedAnimation": "images/t_minishiba/t_minishiba_",
+                  "animationFrames": 1,
                   "x": Math.floor(Math.random() * game.system.width) + (-210),
                   "y": Math.floor(Math.random() * game.system.height) + 0,
                   "nextRound": "End",
@@ -167,7 +334,6 @@ game.module(
           this.correctCounter += 1;
           if (this.correctCounter === this.correctToWin) {
             this.won = true;
-            console.log(this, this.falseBubbles)
             for (var i = 0; i < this.falseBubbles.length; i++) {
               sprite = this.falseBubbles[i].anim;
               sprite.tweenAlpha.stop();
@@ -183,7 +349,6 @@ game.module(
           }
           for (var i = 0; i < 10; i++) {
             rand = Math.floor(Math.random() * this.falseBubbles.length);
-            console.log(rand)
             if (this.falseBubbles[rand].anim !== undefined) {
               if (this.falseBubbles[rand].anim.removed !== true) {
                 this.falseBubbles[rand].anim.removed = true;
@@ -208,8 +373,16 @@ game.module(
         "falseBubbles": [],
         "corectBubbles": [],
         "bubbles": [],
+        "maxBubbleScale": 4,
         "start": function() {
           var that = this;
+          var tween = new game.Tween(game.scene.bg.bgContainer);
+          tween.to({
+            alpha: 0
+          }, 1000);
+          tween.easing('Quadratic.InOut');
+          tween.start();
+
           this.mainBubble = new game.Bubble({
             "type": "growingBubble",
             "asset": "images/b_crash/b_crash.png",
@@ -220,13 +393,14 @@ game.module(
             "introAnimation": "plop",
             "outroAnimation": "biggerPlop"
           });
+          mainBubble = this.mainBubble;
           for (var i = 0; i < 5; i++) {
             this.generateBubble();
           }
         },
         "generateBubble": function() {
           var that = this;
-          bubbleTypes = ["correct", "false"];
+          bubbleTypes = ["correct", "correct", "correct", "correct", "false"];
           var rand = bubbleTypes[Math.floor(Math.random() * bubbleTypes.length)];
           if (rand === "correct") {
             that.bubbles.push(new game.Bubble({
@@ -263,70 +437,39 @@ game.module(
           }
         },
         "check": function(bubble) {
+          var tween;
           if (this.mainBubble.anim.scale.x >= 4) {
-            game.rounds.nextRound("youLost");
+            console.log("checkif");
+            game.rounds.nextRound("round1");
             return;
           }
-          if (this.mainBubble.anim.scale.x <= 0) {
-            game.rounds.nextRound("youWon");
+          if (this.mainBubble.anim.scale.x <= 0.5) {
+            game.rounds.nextRound("zwischenSequenz1");
             return;
           }
           bubble.remove();
           this.generateBubble();
         },
         "onEnd": function() {
-          // game.rounds.removeBubbles();
+          game.rounds.removeBubbles();
+          this.mainBubble.anim.remove();
+          tween = new game.Tween(game.scene.bg.bgContainer);
+          tween.to({
+            alpha: 1
+          }, 1000);
+          tween.easing('Quadratic.InOut');
+          tween.start();
         }
       },
-      "randomDepAlt": {
-        "mainBubble": undefined,
-        "maxBubbleScale": 4,
+      "end": {
+        "name": "end",
         "bubbles": [],
-        "won": false,
         "start": function() {
-          var that = this;
-          var assets = [];
-          assets.push("images/bubble_toast_animsheet.png");
-          assets.push("images/bubble_test_animsheet.png");
-          assets.push("images/bubble_talk.png");
-          this.mainBubble = new game.Bubble({
-            "type": "growingBubble",
-            "asset": "images/bubble_toast_animsheet.png",
-            "clickedAnimation": "images/thought_test.png",
-            "x": game.system.width * 0.70,
-            "y": game.system.height / 2,
-            "nextRound": "End",
-            "introAnimation": "plop",
-            "outroAnimation": "biggerPlop"
-          });
-          for (var i = 0; i < 40; i++) {
-            game.scene.addTimer(Math.floor(Math.random() * 12000) + 100, function() {
-              if (that.won === false) {
-                that.bubbles.push(new game.Bubble({
-                  "type": "smallerMakingBubble",
-                  "asset": assets[Math.floor(Math.random() * assets.length) + 0],
-                  "clickedAnimation": "images/thought_test.png",
-                  "x": Math.floor(Math.random() * game.system.width) + (-210),
-                  "y": Math.floor(Math.random() * game.system.height) + 0,
-                  "nextRound": "End",
-                  "introAnimation": "plop",
-                  "outroAnimation": "plop"
-                }));
-              }
-            });
-          }
-          game.scene.addTimer(10000, function() {
-            that.won = true;
-            that.mainBubble.anim.remove();
-            game.rounds.nextRound("End");
-          });
+          game.end = game.end || {};
+          game.end.step = "c_ship_arrival";
+          game.end.PlayerFirstLoadDone = undefined;
+          game.end.finaleShipXPosition = 320;
         },
-        "onEnd": function() {
-
-        }
-      },
-      "End": {
-        "start": function() {},
         "onEnd": function() {}
       },
       "youLost": {
