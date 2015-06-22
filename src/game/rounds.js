@@ -40,7 +40,7 @@ game.module(
           this.bubbles.push(new game.Bubble({
             "asset": "images/b_crash/b_crash.png",
             "clickedAnimation": "images/t_crash/t_crash_",
-            "animationFrames": 1,
+            "animationFrames": 402,
             "x": -250,
             "y": 0,
             "playerTransitionAnimation": {
@@ -223,7 +223,7 @@ game.module(
             "type": "correct",
             "asset": "images/b_minishiba/b_minishiba.png",
             "clickedAnimation": "images/t_minishiba/t_minishiba_",
-            "animationFrames": 1,
+            "animationFrames": 201,
             "x": -250,
             "y": 0,
             "playerTransitionAnimation": {
@@ -297,7 +297,7 @@ game.module(
                   "type": "falseBubble",
                   "asset": assets[Math.floor(Math.random() * assets.length) + 0],
                   "clickedAnimation": "images/t_minishiba/t_minishiba_",
-                  "animationFrames": 1,
+                  "animationFrames": 201,
                   "x": Math.floor(Math.random() * game.system.width) + (-210),
                   "y": Math.floor(Math.random() * game.system.height) + 0,
                   "nextRound": "End",
