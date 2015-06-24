@@ -1,6 +1,6 @@
 pandaConfig = {
-  name: 'MyPandaGame',
-  version: '0.0.2',
+  name: "MyPandaGame",
+  version: "0.0.2",
   system: {
     width: 1280,
     height: 720,
@@ -8,7 +8,7 @@ pandaConfig = {
     webGL: true
   },
   debug: {
-    color: 'white',
+    color: "white",
     position: {
       x: 2,
       y: 740

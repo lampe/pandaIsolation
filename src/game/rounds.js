@@ -4,8 +4,8 @@ game.module(
   .body(function() {
     game.rounds = {
       "start": function() {
-        game.rounds.round7.start();
-        game.inRound = game.rounds.round7;
+        game.rounds.round1.start();
+        game.inRound = game.rounds.round1;
       },
       "nextRound": function(round) {
         console.log("changing to round: ", round);
@@ -40,7 +40,7 @@ game.module(
           this.bubbles.push(new game.Bubble({
             "asset": "images/b_crash/b_crash.png",
             "clickedAnimation": "images/t_crash/t_crash_",
-            "animationFrames": 402,
+            "animationFrames": 1,
             "x": -250,
             "y": 0,
             "playerTransitionAnimation": {
@@ -59,6 +59,7 @@ game.module(
         },
         "onEnd": function() {
           game.rounds.removeBubbles();
+          game.audio.d1 = game.audio.playSound('d1');
           game.scene.bg.changeBackground("staticD1");
         }
       },
@@ -73,6 +74,8 @@ game.module(
             "y": 0,
             "costumeClickTap": function() {
               game.rounds.removeBubbles();
+              game.audio.stopSound(game.audio.d1);
+              game.audio.d2 = game.audio.playSound('d2');
               game.scene.bg.changeBackground("staticD2");
               var tween = new game.Tween(this);
               tween.to({
@@ -187,6 +190,8 @@ game.module(
           // game.player.changePlayerAnimatoin("images/c_sadrepair/c_sadrepair_", 255, function() {});
         },
         "onEnd": function() {
+          game.audio.stopSound(game.audio.d2);
+          game.audio.d1 = game.audio.playSound('d1');
           game.scene.bg.changeBackground("staticD1");
           game.rounds.removeBubbles();
         }
@@ -211,6 +216,7 @@ game.module(
           // game.player.changePlayerAnimatoin("images/c_sadrepair/c_sadrepair_", 255, function() {});
         },
         "onEnd": function() {
+          game.audio.stopSound(game.audio.d1);
           game.scene.bg.changeBackground("staticBg1");
           game.rounds.removeBubbles();
         }
@@ -234,6 +240,8 @@ game.module(
           }));
         },
         "onEnd": function() {
+          game.audio.m1 = game.audio.playSound('m1');
+
           game.scene.bg.changeBackground("staticM1");
 
           game.rounds.removeBubbles();
@@ -266,6 +274,7 @@ game.module(
               // tween.start();
               game.player.movePlayerForward = true;
               game.player.clickedOnShiba = true;
+              game.audio.m2 = game.audio.playSound('m2');
               game.scene.bg.changeBackground("staticM2");
             }
           });
@@ -307,7 +316,7 @@ game.module(
               }
             });
           }
-          for (var i = 0; i < this.correctToWin; i++) {
+          for (i = 0; i < this.correctToWin; i++) {
             game.scene.addTimer(Math.floor(Math.random() * 5000) + 500, function() {
               that.corectBubbles.push(new game.Bubble({
                 "type": "correctBubble",

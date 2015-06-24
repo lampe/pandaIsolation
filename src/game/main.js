@@ -1,21 +1,21 @@
 game.module(
-    'game.main',
-    'game.pixi'
+    "game.main",
+    "game.pixi"
   )
   .require(
-    'game.objectsManager',
-    'game.assets',
-    'game.objects',
-    'game.effects',
-    'game.rounds'
+    "game.objectsManager",
+    "game.assets",
+    "game.objects",
+    "game.effects",
+    "game.rounds"
   )
   .body(function() {
-    game.createScene('Main', {
+    game.createScene("Main", {
       init: function() {
         this.addTimer(1000);
         this.bg = new game.ParallaxBackground();
         game.player = new game.Player({
-          "path": 'images/c_idle/c_idle_',
+          "path": "images/c_idle/c_idle_",
           "animationFrames": 20,
           "position": {
             "x": game.system.width / 3,
@@ -26,6 +26,15 @@ game.module(
             "y": 215
           }
         });
+        game.audio.playMusic("baseloop");
+        game.audio.m1 = game.audio.playSound('m1');
+        game.audio.m2 = game.audio.playSound('m2');
+        game.audio.d1 = game.audio.playSound('d1');
+        game.audio.d2 = game.audio.playSound('d2');
+        game.audio.stopSound(game.audio.m1);
+        game.audio.stopSound(game.audio.m2);
+        game.audio.stopSound(game.audio.d1);
+        game.audio.stopSound(game.audio.d1);
         // game.effects.Displacement.start();
         game.antenne2IsCreated = false;
         this.objectsManager = new game.ObjectsManager();
@@ -42,12 +51,12 @@ game.module(
               if (game.antenne.position.x < game.player.sprite[game.player.i].position.x) {
                 game.antenne.position.x += 1;
               } else {
-                this.changePlayerX = true
+                this.changePlayerX = true;
               }
               if (game.antenne.position.y < game.player.sprite[game.player.i].position.y) {
                 game.antenne.position.y += 1;
               } else {
-                this.changePlayerY = true
+                this.changePlayerY = true;
               }
               if (this.changePlayerX === true && this.changePlayerY === true) {
                 game.scene.removeObject(game.antenne);
@@ -76,7 +85,7 @@ game.module(
         if (game.inRound.name === "round6" && game.player.i === 56) {
           if (game.antenne2IsCreated !== true) {
             game.antenne2IsCreated = true;
-            game.antenne2 = new game.Sprite('images/antenne.png');
+            game.antenne2 = new game.Sprite("images/antenne.png");
             game.antenne2.position.set(game.player.sprite[game.player.i].position.x, game.player.sprite[game.player.i].position.y);
             game.antenne2.scale.set(0.75, 0.75);
             game.antenne2.anchor.set(0.25, 0.48);

@@ -112,7 +112,7 @@ game.module(
                 that.tweenAlpha.start();
               });
             } else {
-              game.audio.playSound("audio/clickbubble.wav");
+              // game.audio.playSound("audio/clickbubble.wav");
               that.tweenAlpha.stop();
               that.tweenAlpha = new game.Tween(that.position);
               that.tweenAlpha.to({
