@@ -40,7 +40,7 @@ game.module(
           this.bubbles.push(new game.Bubble({
             "asset": "images/b_crash/b_crash.png",
             "clickedAnimation": "images/t_crash/t_crash_",
-            "animationFrames": 1,
+            "animationFrames": 402,
             "x": -250,
             "y": 0,
             "playerTransitionAnimation": {
@@ -60,11 +60,11 @@ game.module(
         "onEnd": function() {
           game.rounds.removeBubbles();
           game.audio.d1 = game.audio.playSound('d1');
-          game.audio.setVolume(game.audio.d1, 0.1);
-          game.audio.tweenD1 = new game.Tween(game.audio.d1);
-          game.audio.tweenD1.to({musicVolume: 1.0}, 10000);
-          game.audio.tweenD1.easing('Quadratic.InOut');
-          game.audio.tweenD1.start();
+          // game.audio.setVolume(game.audio.d1, 0.1);
+          // game.audio.tweenD1 = new game.Tween(game.audio.d1);
+          // game.audio.tweenD1.to({musicVolume: 1.0}, 10000);
+          // game.audio.tweenD1.easing('Quadratic.InOut');
+          // game.audio.tweenD1.start();
           game.scene.bg.changeBackground("staticD1");
         }
       },
