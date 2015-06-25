@@ -27,6 +27,11 @@ game.module(
           }
         });
         game.audio.playMusic("baseloop");
+        game.audio.setMusicVolume(0.2);
+        game.audio.musicTween = new game.Tween(game.audio);
+        game.audio.musicTween.to({musicVolume: 1.0}, 10000);
+        game.audio.musicTween.easing('Quadratic.InOut');
+        game.audio.musicTween.start();
         game.audio.m1 = game.audio.playSound('m1');
         game.audio.m2 = game.audio.playSound('m2');
         game.audio.d1 = game.audio.playSound('d1');
@@ -44,7 +49,9 @@ game.module(
         this._super();
         this.changePlayerX = false;
         this.changePlayerY = false;
-
+        if(game.changeAudio = true){
+          
+        }
         if (game.antenne) {
           if (game.antenne.remoeved === false) {
             if (game.player.sprite[game.player.i]) {

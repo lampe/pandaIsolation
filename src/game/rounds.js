@@ -60,6 +60,11 @@ game.module(
         "onEnd": function() {
           game.rounds.removeBubbles();
           game.audio.d1 = game.audio.playSound('d1');
+          game.audio.setVolume(game.audio.d1, 0.1);
+          game.audio.tweenD1 = new game.Tween(game.audio.d1);
+          game.audio.tweenD1.to({musicVolume: 1.0}, 10000);
+          game.audio.tweenD1.easing('Quadratic.InOut');
+          game.audio.tweenD1.start();
           game.scene.bg.changeBackground("staticD1");
         }
       },

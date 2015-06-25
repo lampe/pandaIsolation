@@ -128,6 +128,7 @@ game.module(
               }, 1000);
               that.tweenAlpha.easing('Quadratic.InOut');
               that.tweenAlpha.start();
+              game.rounds.removeBubbles();
               that.animationeTimer = new game.Timer();
               game.scene.addTimer(1000, function() {
                 var animation = new game.AnimationMovie({
