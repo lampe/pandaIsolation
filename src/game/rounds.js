@@ -4,8 +4,8 @@ game.module(
   .body(function() {
     game.rounds = {
       "start": function() {
-        game.rounds.round2.start();
-        game.inRound = game.rounds.round2;
+        game.rounds.round1.start();
+        game.inRound = game.rounds.round;
       },
       "nextRound": function(round) {
         console.log("changing to round: ", round);
