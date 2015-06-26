@@ -4,8 +4,8 @@ game.module(
   .body(function() {
     game.rounds = {
       "start": function() {
-        game.rounds.round1.start();
-        game.inRound = game.rounds.round1;
+        game.rounds.round2.start();
+        game.inRound = game.rounds.round2;
       },
       "nextRound": function(round) {
         console.log("changing to round: ", round);
@@ -54,6 +54,7 @@ game.module(
             "clickedAnimation": 'images/thought_talk.png',
             "x": 250,
             "y": 0,
+            "clickTap": function() {},
             "isFake": true
           }));
         },
@@ -97,6 +98,7 @@ game.module(
             "asset": "images/b_saturn/b_saturn.png",
             "x": 250,
             "y": 0,
+            "clickTap": function() {},
             "isFake": true
           }));
         },
@@ -212,8 +214,8 @@ game.module(
             "x": -250,
             "y": 0,
             "playerTransitionAnimation": {
-              "path": "images/c_idle/c_idle_",
-              "animationFrames": 20
+              "path": "images/c_sos_idle/c_sos_idle_",
+              "animationFrames": 8
             },
             "nextRound": "zwischenSequenz3"
           }));
@@ -288,6 +290,7 @@ game.module(
             "asset": "images/b_shiba/b_shiba.png",
             "x": -250,
             "y": 0,
+            "clickTap": function() {},
             "isFake": true
           }));
         },

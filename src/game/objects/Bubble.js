@@ -145,8 +145,9 @@ game.module(
             }
           }
         }
+        that.clicked = true;
       }
-      that.clicked = true;
+
     },
     introAnimation: function(p) {
       var that = this;
