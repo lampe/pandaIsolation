@@ -5,7 +5,7 @@ game.module(
     game.rounds = {
       "start": function() {
         game.rounds.round1.start();
-        game.inRound = game.rounds.round;
+        game.inRound = game.rounds.round1;
       },
       "nextRound": function(round) {
         console.log("changing to round: ", round);
