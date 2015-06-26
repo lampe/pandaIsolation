@@ -41,6 +41,7 @@ game.module(
         game.audio.stopSound(game.audio.d1);
         game.audio.stopSound(game.audio.d1);
         // game.effects.Displacement.start();
+        game.effects.CameraWabbel.start();
         game.antenne2IsCreated = false;
         this.objectsManager = new game.ObjectsManager();
         game.rounds.start();
@@ -50,7 +51,7 @@ game.module(
         this.changePlayerX = false;
         this.changePlayerY = false;
         if(game.changeAudio = true){
-          
+
         }
         if (game.antenne) {
           if (game.antenne.remoeved === false) {

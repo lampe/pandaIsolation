@@ -79,7 +79,6 @@ game.module(
             "y": 0,
             "costumeClickTap": function() {
               game.rounds.removeBubbles();
-              game.audio.stopSound(game.audio.d1);
               game.audio.d2 = game.audio.playSound('d2');
               game.scene.bg.changeBackground("staticD2");
               var tween = new game.Tween(this);
@@ -245,6 +244,7 @@ game.module(
           }));
         },
         "onEnd": function() {
+          game.audio.stopSound(game.audio.d1);
           game.audio.m1 = game.audio.playSound('m1');
 
           game.scene.bg.changeBackground("staticM1");
@@ -390,6 +390,7 @@ game.module(
         "maxBubbleScale": 4,
         "start": function() {
           var that = this;
+          game.player.changePlayerAnimatoin("images/c_depr_idle/c_idle_", 2, function() {});
           var tween = new game.Tween(game.scene.bg.bgContainer);
           tween.to({
             alpha: 0
