@@ -38,7 +38,6 @@ game.module(
           }
         }
         if (this.clickedOnShiba === true) {
-          console.log(game.rotation % 628)
           if (game.rotation % 63114 === 0) {
             this.rotationValue = 0;
             this.movePlayerForward = false;

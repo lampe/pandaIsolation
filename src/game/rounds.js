@@ -390,7 +390,7 @@ game.module(
         "maxBubbleScale": 4,
         "start": function() {
           var that = this;
-          game.player.changePlayerAnimatoin("images/c_depr_idle/c_idle_", 2, function() {});
+          game.player.changePlayerAnimatoin("images/c_depr_idle/c_depr_idle_", 2, function() {});
           var tween = new game.Tween(game.scene.bg.bgContainer);
           tween.to({
             alpha: 0
@@ -454,7 +454,6 @@ game.module(
         "check": function(bubble) {
           var tween;
           if (this.mainBubble.anim.scale.x >= 4) {
-            console.log("checkif");
             game.rounds.nextRound("round1");
             return;
           }
