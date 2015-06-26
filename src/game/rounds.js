@@ -457,6 +457,7 @@ game.module(
         "check": function(bubble) {
           var tween;
           if (this.mainBubble.anim.scale.x >= 4) {
+            game.player.changePlayerAnimatoin("images/c_idle/c_idle_", 20, function() {});
             game.rounds.nextRound("round1");
             return;
           }
