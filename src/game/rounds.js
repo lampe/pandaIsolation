@@ -4,8 +4,8 @@ game.module(
   .body(function() {
     game.rounds = {
       "start": function() {
-        game.rounds.round1.start();
-        game.inRound = game.rounds.round1;
+        game.rounds.zwischenSequenz3.start();
+        game.inRound = game.rounds.zwischenSequenz3;
       },
       "nextRound": function(round) {
         // setTimeout(function() {
@@ -175,7 +175,7 @@ game.module(
           // game.antenne.addTo(game.scene.stage);
           // game.scene.addObject(game.antenne);
           // game.antenne.remoeved = false;
-          game.player.changePlayerAnimatoin("character/c_sosconfirmed/c_sosconfirmed_", 144, function() {});
+          game.player.changePlayerAnimatoin("character/c_sosconfirmed/c_sosconfirmed_", 215, function() {});
         },
         "onEnd": function() {
 
@@ -211,7 +211,6 @@ game.module(
             "clickTap": function() {},
             "isFake": true
           }));
-          // game.player.changePlayerAnimatoin("character/c_sadrepair/c_sadrepair_", 255, function() {});
         },
         "onEnd": function() {
           game.audio.stopSound(game.audio.d2);
@@ -251,7 +250,6 @@ game.module(
             "clickTap": function() {},
             "isFake": true
           }));
-          // game.player.changePlayerAnimatoin("character/c_sadrepair/c_sadrepair_", 255, function() {});
         },
         "onEnd": function() {
           game.audio.stopSound(game.audio.d1);

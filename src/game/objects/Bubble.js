@@ -54,7 +54,9 @@ game.module(
     clickTap: function() {
       var that = this;
       if (that.isFake === true) {
-        game.audio.playSound("bubblePlayFake");
+        this.fakesSound = game.audio.playSound("bubblePlayFake");
+        game.audio.setVolume(this.fakesSound, 0.8);
+
         if (that.isShaking === false) {
           that.tweenAlpha.pause();
           that.shake = new game.Tween(that.position);
@@ -74,7 +76,9 @@ game.module(
         }
       } else {
         if (that.costumeClickTap) {
-          game.audio.playSound("bubblePlay");
+          this.bubbleSound = game.audio.playSound("bubblePlay");
+          game.audio.setVolume(this.bubbleSound, 0.8);
+
           that.costumeClickTap();
           return false;
         } else {

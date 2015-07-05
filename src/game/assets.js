@@ -80,7 +80,7 @@ game.module(
     for (i = 1; i <= 3; i++) {
       game.addAsset("character/c_ship_theend/c_ship_theend_" + i + ".png");
     }
-    for (i = 1; i <= 214; i++) {
+    for (i = 1; i <= 215; i++) {
       game.addAsset("character/c_sosconfirmed/c_sosconfirmed_" + i + ".png");
     }
     for (i = 1; i <= 8; i++) {
@@ -171,13 +171,20 @@ game.module(
     game.addAudio("audio/c_antennacatch_greifen_schlüsselhervorholen.mp3", "c_antennacatch_greifen_schlüsselhervorholen");
     game.addAudio("audio/c_antennacatch_dagegenschlagen_c_grunt_rausschubsen.mp3", "c_antennacatch_dagegenschlagen_c_grunt_rausschubsen");
     game.addAudio("audio/c_antennacatch_reparieren_c_grunt_seilhochziehen.mp3", "c_antennacatch_reparieren_c_grunt_seilhochziehen");
-    game.addAudio("audio/c_sosstart_signal_ohneradiowellen.mp3", "c_sosstart_signal_ohneradiowellen");
     game.addAudio("audio/c_sosstart_signal_mitradiowellen.mp3", "c_sosstart_signal_mitradiowellen");
     game.addAudio("audio/naut_cheer_1.mp3", "naut_cheer_1");
     game.addAudio("audio/naut_laugh_2.mp3", "naut_laugh_2");
     game.addAudio("audio/naut_facepalm.mp3", "naut_facepalm");
     game.addAudio("audio/naut_cheer_2.mp3", "naut_cheer_2");
+    game.addAudio("audio/naut_cry_1.mp3", "naut_cry_1");
+    game.addAudio("audio/naut_cry_2.mp3", "naut_cry_2");
+    game.addAudio("audio/naut_cry_3.mp3", "naut_cry_3");
+    game.addAudio("audio/naut_cry_5.mp3", "naut_cry_5");
+
     game.addAudio("audio/c_sosconfirmed_completesound.mp3", "c_sosconfirmed_completesound");
+
+    game.addAudio("audio/funk_erde_voice_1.mp3","funk_erde_voice_1");
+    game.addAudio("audio/funk_erde_voice_2.mp3","funk_erde_voice_2");
 
     //video
   });
