@@ -4,18 +4,18 @@ game.module(
   .body(function() {
     game.rounds = {
       "start": function() {
-        game.rounds.round1.start();
-        game.inRound = game.rounds.round1;
+        game.rounds.round6.start();
+        game.inRound = game.rounds.round6;
       },
       "nextRound": function(round) {
-        setTimeout(function() {
+        // setTimeout(function() {
           console.log("changing to round: ", round);
           if (game.inRound.onEnd() !== undefined) {
             game.inRound.onEnd();
           }
           game.rounds[round].start();
           game.inRound = game.rounds[round];
-        }, 1500);
+        // }, 1500);
       },
       "removeBubbles": function() {
         if (game.inRound.bubbles !== undefined) {

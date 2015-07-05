@@ -168,6 +168,16 @@ game.module(
     game.addAudio("audio/naut_cry_6.mp3", "nautCry");
     game.addAudio("audio/c_antennacatch_completesound.mp3", "c_antennacatch_completesound");
 
+    game.addAudio("audio/c_antennacatch_greifen_schlüsselhervorholen.mp3", "c_antennacatch_greifen_schlüsselhervorholen");
+    game.addAudio("audio/c_antennacatch_dagegenschlagen_c_grunt_rausschubsen.mp3", "c_antennacatch_dagegenschlagen_c_grunt_rausschubsen");
+    game.addAudio("audio/c_antennacatch_reparieren_c_grunt_seilhochziehen.mp3", "c_antennacatch_reparieren_c_grunt_seilhochziehen");
+    game.addAudio("audio/c_sosstart_signal_ohneradiowellen.mp3", "c_sosstart_signal_ohneradiowellen");
+    game.addAudio("audio/c_sosstart_signal_mitradiowellen.mp3", "c_sosstart_signal_mitradiowellen");
+    game.addAudio("audio/naut_cheer_1.mp3", "naut_cheer_1");
+    game.addAudio("audio/naut_laugh_2.mp3", "naut_laugh_2");
+    game.addAudio("audio/naut_facepalm.mp3", "naut_facepalm");
+    game.addAudio("audio/naut_cheer_2.mp3", "naut_cheer_2");
+    game.addAudio("audio/c_sosconfirmed_completesound.mp3", "c_sosconfirmed_completesound");
 
     //video
   });

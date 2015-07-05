@@ -70,7 +70,7 @@ game.module(
                 game.scene.removeObject(game.antenne);
                 game.antenne.remoeved = true;
                 game.player.changePlayerAnimatoin("character/c_antennacatch/c_antennacatch_", 322, function() {});
-                game.audio.playSound("c_antennacatch_completesound");
+                // game.audio.playSound("c_antennacatch_completesound");
               }
               game.antenne.rotation = game.player.sprite[game.player.i].rotation;
             }
@@ -78,21 +78,143 @@ game.module(
             game.antenne.remove();
           }
         }
+        if (game.inRound.name === "zwischenSequenz1" && game.player.i === 66) {
+          game.audio.playSound("c_antennacatch_greifen_schlüsselhervorholen");
+        }
+        if (game.inRound.name === "zwischenSequenz1" && game.player.i === 94) {
+          game.audio.playSound("c_antennacatch_dagegenschlagen_c_grunt_rausschubsen");
+        }
+        if (game.inRound.name === "zwischenSequenz1" && game.player.i === 117) {
+          game.audio.playSound("c_antennacatch_dagegenschlagen_c_grunt_rausschubsen");
+        }
+        if (game.inRound.name === "zwischenSequenz1" && game.player.i === 263) {
+          game.audio.playSound("c_antennacatch_reparieren_c_grunt_seilhochziehen");
+        }
+        if (game.inRound.name === "zwischenSequenz1" && game.player.i === 299) {
+          game.audio.playSound("c_antennacatch_reparieren_c_grunt_seilhochziehen");
+        }
         if (game.inRound.name === "zwischenSequenz1" && game.player.i >= 322) {
           game.player.changePlayerAnimatoin("character/c_repair_idle/c_repair_idle_", 9, function() {});
-
-
           game.rounds.nextRound("round3");
+        }
+
+        if (game.inRound.name === "zwischenSequenz2" && game.player.i === 2) {
+          game.audio.playSound("c_antennacatch_reparieren_c_grunt_seilhochziehen");
+        }
+        if (game.inRound.name === "zwischenSequenz2" && game.player.i === 42) {
+          game.audio.playSound("c_antennacatch_reparieren_c_grunt_seilhochziehen");
+        }
+        if (game.inRound.name === "zwischenSequenz2" && game.player.i === 71) {
+          game.audio.playSound("c_antennacatch_dagegenschlagen_c_grunt_rausschubsen");
+        }
+        if (game.inRound.name === "zwischenSequenz2" && game.player.i === 72) {
+          this.g = game.audio.playSound("c_sosstart_signal_ohneradiowellen");
+          game.audio.setVolume(g, 0.5);
+        }
+        if (game.inRound.name === "zwischenSequenz2" && game.player.i === 74) {
+          this.g = game.audio.playSound("c_sosstart_signal_ohneradiowellen");
+          game.audio.setVolume(g, 0.5);
+        }
+        if (game.inRound.name === "zwischenSequenz2" && game.player.i === 76) {
+          this.g = game.audio.playSound("c_sosstart_signal_ohneradiowellen");
+          game.audio.setVolume(g, 0.5);
+        }
+        if (game.inRound.name === "zwischenSequenz2" && game.player.i === 78) {
+          this.g = game.audio.playSound("c_sosstart_signal_ohneradiowellen");
+          game.audio.setVolume(g, 0.5);
+        }
+        if (game.inRound.name === "zwischenSequenz2" && game.player.i === 80) {
+          this.g = game.audio.playSound("c_sosstart_signal_ohneradiowellen");
+          game.audio.setVolume(g, 0.5);
+        }
+        if (game.inRound.name === "zwischenSequenz2" && game.player.i === 85) {
+          this.g = game.audio.playSound("c_sosstart_signal_ohneradiowellen");
+          game.audio.setVolume(g, 0.5);
+        }
+        if (game.inRound.name === "zwischenSequenz2" && game.player.i === 90) {
+          this.g = game.audio.playSound("c_sosstart_signal_ohneradiowellen");
+          game.audio.setVolume(g, 0.5);
+        }
+        if (game.inRound.name === "zwischenSequenz2" && game.player.i === 95) {
+          this.g = game.audio.playSound("c_sosstart_signal_ohneradiowellen");
+          game.audio.setVolume(g, 0.5);
+        }
+        if (game.inRound.name === "zwischenSequenz2" && game.player.i === 90) {
+          this.g = game.audio.playSound("c_sosstart_signal_ohneradiowellen");
+          game.audio.setVolume(g, 0.5);
+        }
+        if (game.inRound.name === "zwischenSequenz2" && game.player.i === 90) {
+          this.g = game.audio.playSound("c_sosstart_signal_mitradiowellen");
+          game.audio.setVolume(g, 0.5);
+        }
+        if (game.inRound.name === "zwischenSequenz2" && game.player.i === 110) {
+          game.audio.playSound("naut_cheer_1");
+          this.g = game.audio.playSound("c_sosstart_signal_mitradiowellen");
+          game.audio.setVolume(g, 0.5);
+        }
+        if (game.inRound.name === "zwischenSequenz2" && game.player.i === 118) {
+          this.g = game.audio.playSound("c_sosstart_signal_mitradiowellen");
+          game.audio.setVolume(g, 0.5);
+        }
+        if (game.inRound.name === "zwischenSequenz2" && game.player.i === 126) {
+          this.g = game.audio.playSound("c_sosstart_signal_mitradiowellen");
+          game.audio.setVolume(g, 0.5);
+        }
+        if (game.inRound.name === "zwischenSequenz2" && game.player.i === 134) {
+          this.g = game.audio.playSound("c_sosstart_signal_mitradiowellen");
+          game.audio.setVolume(g, 0.5);
+        }
+        if (game.inRound.name === "zwischenSequenz2" && game.player.i === 142) {
+          this.g = game.audio.playSound("c_sosstart_signal_mitradiowellen");
+          game.audio.setVolume(g, 0.5);
+        }
+        if (game.inRound.name === "zwischenSequenz2" && game.player.i === 150) {
+          game.audio.playSound("naut_cheer_2");
+          this.g = game.audio.playSound("c_sosstart_signal_mitradiowellen");
+          game.audio.setVolume(g, 0.5);
+        }
+        if (game.inRound.name === "zwischenSequenz2" && game.player.i === 158) {
+          this.g = game.audio.playSound("c_sosstart_signal_mitradiowellen");
+          game.audio.setVolume(g, 0.5);
+        }
+        if (game.inRound.name === "zwischenSequenz2" && game.player.i === 166) {
+          this.g = game.audio.playSound("c_sosstart_signal_mitradiowellen");
+          game.audio.setVolume(g, 0.5);
+        }
+        if (game.inRound.name === "zwischenSequenz2" && game.player.i === 174) {
+          this.g = game.audio.playSound("c_sosstart_signal_mitradiowellen");
+          game.audio.setVolume(g, 0.5);
+        }
+        if (game.inRound.name === "zwischenSequenz2" && game.player.i === 182) {
+          this.g = game.audio.playSound("c_sosstart_signal_mitradiowellen");
+          game.audio.setVolume(g, 0.5);
+        }
+        if (game.inRound.name === "zwischenSequenz2" && game.player.i === 190) {
+          this.g = game.audio.playSound("c_sosstart_signal_mitradiowellen");
+          game.audio.setVolume(g, 0.5);
         }
         if (game.inRound.name === "zwischenSequenz2" && game.player.i >= 198) {
           game.player.changePlayerAnimatoin("character/c_sos_idle/c_sos_idle_", 8, function() {});
           game.rounds.nextRound("round4");
         }
+        if (game.inRound.name === "zwischenSequenz3" && game.player.i === 22) {
+          this.g = game.audio.playSound("c_sosconfirmed_completesound");
+          // game.audio.setVolume(g, 0.5);
+        }
         if (game.inRound.name === "zwischenSequenz3" && game.player.i >= 144) {
           game.player.changePlayerAnimatoin("character/c_sos_idle/c_sos_idle_", 8, function() {});
           game.rounds.nextRound("round6");
         }
+        if(game.player.properties.path === "character/c_lol+lose/c_lol+lose_" && game.player.i === 21){
+          game.audio.playSound("naut_laugh_2");
+        }
 
+        if(game.player.properties.path === "character/c_lol+lose/c_lol+lose_" && game.player.i === 57){
+          game.audio.playSound("naut_cheer_2");
+        }
+        if(game.player.properties.path === "character/c_lol+lose/c_lol+lose_" && game.player.i === 134){
+          game.audio.playSound("naut_facepalm");
+        }
         if (game.inRound.name === "round6" && game.player.i === 56) {
           if (game.antenne2IsCreated !== true) {
             game.antenne2IsCreated = true;
