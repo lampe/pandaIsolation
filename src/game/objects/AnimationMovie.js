@@ -38,7 +38,10 @@ game.module(
     play: function() {
       this.i = 1;
       this.j = 1;
+      this.bubblePlay = game.audio.playSound('bubblePlay');
+      game.audio.setVolume(this.bubblePlay, 0.5);
       this.isPlaying = true;
+
     },
     stop: function() {
       if (this.properties.animationFrames < this.i) {
@@ -49,6 +52,7 @@ game.module(
     },
     isEnded: function() {
       var that = this;
+      game.audio.stopSound(this.bubblePlay);
       game.player.changePlayerAnimatoin(that.properties.playerTransitionAnimation.path, that.properties.playerTransitionAnimation.animationFrames, function() {
         game.rounds.nextRound(that.properties.nextRound);
       });

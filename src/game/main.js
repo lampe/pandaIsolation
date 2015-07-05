@@ -15,7 +15,7 @@ game.module(
         this.addTimer(1000);
         this.bg = new game.ParallaxBackground();
         game.player = new game.Player({
-          "path": "images/c_idle/c_idle_",
+          "path": "character/c_idle/c_idle_",
           "animationFrames": 20,
           "position": {
             "x": game.system.width / 3,
@@ -69,7 +69,8 @@ game.module(
               if (this.changePlayerX === true && this.changePlayerY === true) {
                 game.scene.removeObject(game.antenne);
                 game.antenne.remoeved = true;
-                game.player.changePlayerAnimatoin("images/c_antennacatch/c_antennacatch_", 322, function() {});
+                game.player.changePlayerAnimatoin("character/c_antennacatch/c_antennacatch_", 322, function() {});
+                game.audio.playSound("c_antennacatch_completesound");
               }
               game.antenne.rotation = game.player.sprite[game.player.i].rotation;
             }
@@ -78,22 +79,24 @@ game.module(
           }
         }
         if (game.inRound.name === "zwischenSequenz1" && game.player.i >= 322) {
-          game.player.changePlayerAnimatoin("images/c_repair_idle/c_repair_idle_", 9, function() {});
+          game.player.changePlayerAnimatoin("character/c_repair_idle/c_repair_idle_", 9, function() {});
+
+
           game.rounds.nextRound("round3");
         }
         if (game.inRound.name === "zwischenSequenz2" && game.player.i >= 198) {
-          game.player.changePlayerAnimatoin("images/c_sos_idle/c_sos_idle_", 8, function() {});
+          game.player.changePlayerAnimatoin("character/c_sos_idle/c_sos_idle_", 8, function() {});
           game.rounds.nextRound("round4");
         }
         if (game.inRound.name === "zwischenSequenz3" && game.player.i >= 144) {
-          game.player.changePlayerAnimatoin("images/c_sos_idle/c_sos_idle_", 8, function() {});
+          game.player.changePlayerAnimatoin("character/c_sos_idle/c_sos_idle_", 8, function() {});
           game.rounds.nextRound("round6");
         }
 
         if (game.inRound.name === "round6" && game.player.i === 56) {
           if (game.antenne2IsCreated !== true) {
             game.antenne2IsCreated = true;
-            game.antenne2 = new game.Sprite("images/antenne.png");
+            game.antenne2 = new game.Sprite("images/antenna.png");
             game.antenne2.position.set(game.player.sprite[game.player.i].position.x, game.player.sprite[game.player.i].position.y);
             game.antenne2.scale.set(0.75, 0.75);
             game.antenne2.anchor.set(0.25, 0.48);
@@ -110,7 +113,7 @@ game.module(
         if (game.inRound.name === "round6" && game.player.i === 169) {
           game.antenne2.remove();
           game.antenne2IsCreated = false;
-          game.player.changePlayerAnimatoin("images/c_sos_idle/c_sos_idle_", 8, function() {});
+          game.player.changePlayerAnimatoin("character/c_sos_idle/c_sos_idle_", 8, function() {});
           game.scene.bg.changeBackground("staticM1");
           game.rounds.nextRound("round7");
         }
@@ -121,7 +124,7 @@ game.module(
               game.player.rotationValue = 0;
               game.player.properties.position.y = 200;
               game.player.properties.position.x = -820;
-              game.player.changePlayerAnimatoin("images/c_ship_arrival/c_ship_arrival_", 3, function() {});
+              game.player.changePlayerAnimatoin("character/c_ship_arrival/c_ship_arrival_", 3, function() {});
               game.end.PlayerFirstLoadDone = true;
             }
             if (game.player.properties.position.x > 320) {
@@ -135,7 +138,7 @@ game.module(
           }
           if (game.end.step === "c_ship_evac") {
             if (game.end.PlayerFirstLoadDone === false) {
-              game.player.changePlayerAnimatoin("images/c_ship_evac/c_ship_evac_", 311, function() {});
+              game.player.changePlayerAnimatoin("character/c_ship_evac/c_ship_evac_", 311, function() {});
               game.end.PlayerFirstLoadDone = true;
             }
           }

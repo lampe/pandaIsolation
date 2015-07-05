@@ -21,9 +21,10 @@ game.module(
         this.sprite[i].mousedown = p.clickTap;
         this.sprite[i].position.x = p.position.x;
         this.sprite[i].position.y = p.position.y;
+        // this.sprite[i].scale.set(0.75, 0.75);
         this.sprite[i].anchor = {
-          x: 0.25,
-          y: 0.48
+          x: 0.5,
+          y: 0.5
         };
         this.container.addChild(this.sprite[i]);
       }
@@ -69,7 +70,7 @@ game.module(
       this.j = 1;
       this.isPlaying = true;
     },
-    changeShibaAnimatoin: function(path, animationFrames, cb) {
+    changeShibaAnimation: function(path, animationFrames, cb) {
       var i = 1;
       for (i = 1; i <= this.properties.animationFrames; i++) {
         game.scene.stage.removeChild(this.sprite[i]);
@@ -82,10 +83,10 @@ game.module(
         this.sprite[i] = new game.Sprite(this.properties.path + i + ".png");
         this.sprite[i].position.x = this.properties.position.x;
         this.sprite[i].position.y = this.properties.position.y;
-        // this.sprite[i].scale.set(0.75, 0.75);
+        this.sprite[i].scale.set(0.75, 0.75);
         this.sprite[i].anchor = {
-          x: 0.25,
-          y: 0.48
+          x: 0.5,
+          y: 0.5
         };
       }
       this.play();
