@@ -95,7 +95,7 @@ game.module(
     for (i = 1; i <= 68; i++) {
       game.addAsset("character/c_thoughtshake/c_thoughtshake_" + i + ".png");
     }
-    for (i = 1; i <= 3; i++) {
+    for (i = 1; i <= 94; i++) {
       game.addAsset("character/c_tilt/c_tilt_" + i + ".png");
     }
     for (i = 1; i <= 6; i++) {
@@ -154,6 +154,7 @@ game.module(
     }
 
     //sound
+    game.addAudio("audio/Bubble_Play_Sound.mp3", "bubblemoviesound");
     game.addAudio("audio/Soundtrack_Neutral.mp3", "baseloop");
     game.addAudio("audio/Soundtrack_Depression_1.mp3", "d1");
     game.addAudio("audio/Soundtrack_Depression_2.mp3", "d2");

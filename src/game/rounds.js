@@ -4,8 +4,8 @@ game.module(
   .body(function() {
     game.rounds = {
       "start": function() {
-        game.rounds.zwischenSequenz3.start();
-        game.inRound = game.rounds.zwischenSequenz3;
+        game.rounds.round1.start();
+        game.inRound = game.rounds.round1;
       },
       "nextRound": function(round) {
         // setTimeout(function() {
@@ -231,8 +231,8 @@ game.module(
             "x": -250,
             "y": 0,
             "playerTransitionAnimation": {
-              "path": "character/c_sos_idle/c_sos_idle_",
-              "animationFrames": 8
+              "path": "character/c_tilt/c_tilt_",
+              "animationFrames": 94
             },
             "nextRound": "zwischenSequenz3"
           }));

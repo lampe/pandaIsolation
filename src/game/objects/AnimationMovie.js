@@ -38,7 +38,7 @@ game.module(
     play: function() {
       this.i = 1;
       this.j = 1;
-      this.bubblePlay = game.audio.playSound('bubblePlay');
+      this.bubblePlay = game.audio.playSound('bubblemoviesound');
       game.audio.setVolume(this.bubblePlay, 0.5);
       this.isPlaying = true;
 
