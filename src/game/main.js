@@ -236,6 +236,30 @@ game.module(
         //   this.g = game.audio.playSound("c_sosconfirmed_completesound");
         //   // game.audio.setVolume(g, 0.5);
         // }
+        if (game.player.properties.path === "character/c_tilt/c_tilt_" && game.player.i === 2) {
+          this.g = game.audio.playSound("c_sosstart_signal_ohneradiowellen");
+          game.audio.setVolume(this.g, 0.5);
+        }
+        if (game.player.properties.path === "character/c_tilt/c_tilt_" && game.player.i === 17) {
+          this.g = game.audio.playSound("c_sosstart_signal_ohneradiowellen");
+          game.audio.setVolume(this.g, 0.5);
+        }
+        if (game.player.properties.path === "character/c_tilt/c_tilt_" && game.player.i === 33) {
+          this.g = game.audio.playSound("c_sosstart_signal_ohneradiowellen");
+          game.audio.setVolume(this.g, 0.5);
+        }
+        if (game.player.properties.path === "character/c_tilt/c_tilt_" && game.player.i === 49) {
+          this.g = game.audio.playSound("c_sosstart_signal_ohneradiowellen");
+          game.audio.setVolume(this.g, 0.5);
+        }
+        if (game.player.properties.path === "character/c_tilt/c_tilt_" && game.player.i === 65) {
+          this.g = game.audio.playSound("c_sosstart_signal_ohneradiowellen");
+          game.audio.setVolume(this.g, 0.5);
+        }
+        if (game.player.properties.path === "character/c_tilt/c_tilt_" && game.player.i === 81) {
+          this.g = game.audio.playSound("c_sosstart_signal_ohneradiowellen");
+          game.audio.setVolume(this.g, 0.5);
+        }
         if (game.player.properties.path === "character/c_sosconfirmed/c_sosconfirmed_" && game.player.i === 2) {
           this.g = game.audio.playSound("c_sosstart_signal_ohneradiowellen");
           game.audio.setVolume(this.g, 0.5);
