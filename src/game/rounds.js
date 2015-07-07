@@ -4,8 +4,8 @@ game.module(
   .body(function() {
     game.rounds = {
       "start": function() {
-        game.rounds.round1.start();
-        game.inRound = game.rounds.round1;
+        game.rounds.zwischenSequenz1.start();
+        game.inRound = game.rounds.zwischenSequenz1;
       },
       "nextRound": function(round) {
         // setTimeout(function() {
@@ -161,7 +161,9 @@ game.module(
           game.player.changePlayerAnimatoin("character/c_sosstart/c_sosstart_", 198, function() {});
         },
         "onEnd": function() {
-
+          game.audio.stopSound(game.audio.d2);
+          game.audio.d1 = game.audio.playSound('d1');
+          game.scene.bg.changeBackground("staticD1");
         }
       },
       "zwischenSequenz3": {
@@ -213,9 +215,7 @@ game.module(
           }));
         },
         "onEnd": function() {
-          game.audio.stopSound(game.audio.d2);
-          game.audio.d1 = game.audio.playSound('d1');
-          game.scene.bg.changeBackground("staticD1");
+
           game.rounds.removeBubbles();
         }
       },

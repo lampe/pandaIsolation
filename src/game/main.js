@@ -80,6 +80,10 @@ game.module(
             game.antenne.remove();
           }
         }
+
+        if (game.player.properties.path === "character/c_antennacatch/c_antennacatch_" && game.player.i === 2) {
+          this.g = game.audio.playSound("c_antennacatch_greifen_schlüsselhervorholen");
+        }
         if (game.inRound.name === "zwischenSequenz1" && game.player.i === 66) {
           this.g = game.audio.playSound("c_antennacatch_greifen_schlüsselhervorholen");
         }
@@ -93,9 +97,11 @@ game.module(
           // game.audio.setVolume(this.g, 0.5);
 
         }
+        if (game.inRound.name === "zwischenSequenz1" && game.player.i === 227) {
+          game.audio.playSound("c_antennacatch_greifen_schlüsselhervorholen");
+        }
         if (game.inRound.name === "zwischenSequenz1" && game.player.i === 255) {
           game.audio.playSound("c_antennacatch_greifen_schlüsselhervorholen");
-
         }
         if (game.inRound.name === "zwischenSequenz1" && game.player.i === 263) {
           this.g = game.audio.playSound("c_antennacatch_reparieren_c_grunt_seilhochziehen");
@@ -335,6 +341,15 @@ game.module(
         if (game.player.properties.path === "character/c_sosconfirmed/c_sosconfirmed_" && game.player.i === 209) {
           this.g = game.audio.playSound("c_sosstart_signal_ohneradiowellen");
           game.audio.setVolume(this.g, 0.5);
+        }
+
+        if (game.player.properties.path === "character/c_thoughtshake/c_thoughtshake_" && game.player.i === 22) {
+          this.g = game.audio.playSound("naut_facepalm");
+          // game.audio.setVolume(this.g, 0.5);
+        }
+        if (game.player.properties.path === "character/c_shibapull/c_shibapull_" && game.player.i === 16) {
+          this.g = game.audio.playSound("c_antennacatch_greifen_schlüsselhervorholen");
+          // game.audio.setVolume(this.g, 0.5);
         }
         if (game.inRound.name === "zwischenSequenz3" && game.player.i >= 144) {
           game.player.changePlayerAnimatoin("character/c_sos_idle/c_sos_idle_", 8, function() {});

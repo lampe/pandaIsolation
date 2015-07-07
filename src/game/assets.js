@@ -181,7 +181,6 @@ game.module(
     game.addAudio("audio/naut_cry_2.mp3", "naut_cry_2");
     game.addAudio("audio/naut_cry_3.mp3", "naut_cry_3");
     game.addAudio("audio/naut_cry_5.mp3", "naut_cry_5");
-
     game.addAudio("audio/c_sosconfirmed_completesound.mp3", "c_sosconfirmed_completesound");
 
     game.addAudio("audio/funk_erde_voice_1.mp3","funk_erde_voice_1");
