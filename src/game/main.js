@@ -84,34 +84,22 @@ game.module(
         if (game.player.properties.path === "character/c_antennacatch/c_antennacatch_" && game.player.i === 2) {
           this.g = game.audio.playSound("c_antennacatch_greifen_schlüsselhervorholen");
         }
-        if (game.inRound.name === "zwischenSequenz1" && game.player.i === 66) {
-          this.g = game.audio.playSound("c_antennacatch_greifen_schlüsselhervorholen");
-        }
         if (game.inRound.name === "zwischenSequenz1" && game.player.i === 94) {
           game.audio.playSound("c_antennacatch_dagegenschlagen_c_grunt_rausschubsen");
-          // game.audio.setVolume(this.g, 0.5);
-
         }
         if (game.inRound.name === "zwischenSequenz1" && game.player.i === 117) {
           game.audio.playSound("c_antennacatch_dagegenschlagen_c_grunt_rausschubsen");
-          // game.audio.setVolume(this.g, 0.5);
-
         }
         if (game.inRound.name === "zwischenSequenz1" && game.player.i === 227) {
-          game.audio.playSound("c_antennacatch_greifen_schlüsselhervorholen");
-        }
-        if (game.inRound.name === "zwischenSequenz1" && game.player.i === 255) {
           game.audio.playSound("c_antennacatch_greifen_schlüsselhervorholen");
         }
         if (game.inRound.name === "zwischenSequenz1" && game.player.i === 263) {
           this.g = game.audio.playSound("c_antennacatch_reparieren_c_grunt_seilhochziehen");
           game.audio.setVolume(this.g, 0.5);
-
         }
         if (game.inRound.name === "zwischenSequenz1" && game.player.i === 299) {
           this.g = game.audio.playSound("c_antennacatch_reparieren_c_grunt_seilhochziehen");
           game.audio.setVolume(this.g, 0.5);
-
         }
         if (game.inRound.name === "zwischenSequenz1" && game.player.i >= 322) {
           game.player.changePlayerAnimatoin("character/c_repair_idle/c_repair_idle_", 9, function() {});
